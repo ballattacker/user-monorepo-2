@@ -1,10 +1,18 @@
 require "nvchad.mappings"
 
--- add yours here
+vim.keymap.set({ "n", "v", "o" }, "a", "<Nop>")
+vim.keymap.set({ "n" }, "A", "<Nop>")
+vim.keymap.set({ "n", "v", "o" }, "o", "a")
+vim.keymap.set({ "n" }, "O", "A")
 
-local map = vim.keymap.set
+vim.keymap.set({ "n", "v", "o" }, "sh", "^")
+vim.keymap.set({ "n", "v", "o" }, "sl", "$")
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
+vim.keymap.set({ "n", "v" }, "<C-h>", "6h")
+vim.keymap.set({ "n", "v" }, "<C-j>", "3j")
+vim.keymap.set({ "n", "v" }, "<C-k>", "3k")
+vim.keymap.set({ "n", "v" }, "<C-l>", "6l")
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+vim.keymap.set({ "n" }, "eQ", ":quitall!<cr>")
+vim.keymap.set({ "n" }, "ew", ":w<cr>")
+
