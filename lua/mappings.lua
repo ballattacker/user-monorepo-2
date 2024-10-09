@@ -20,11 +20,9 @@ vim.keymap.set({ "n", "v" }, "<C-j>", "3j")
 vim.keymap.set({ "n", "v" }, "<C-k>", "3k")
 vim.keymap.set({ "n", "v" }, "<C-l>", "6l")
 
-vim.keymap.set({ "t" }, "<esc>", "<C-\\><C-n>")
-
-vim.keymap.set({ "i" }, "<C-h>", "<C-w>")
-
 -- these mappings kind of suck actually
+
+vim.keymap.set({ "t" }, "<esc>", "<C-\\><C-n>")
 
 vim.keymap.set({ "n", "v" }, "D", '"_d')
 vim.keymap.set({ "n", "v" }, "C", '"_c')
