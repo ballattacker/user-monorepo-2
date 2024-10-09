@@ -1,8 +1,10 @@
 require "nvchad.mappings"
 
-vim.keymap.del({ "n" }, "<leader>e")
 vim.keymap.del({ "n" }, "<tab>")
 vim.keymap.del({ "n" }, "<S-tab>")
+vim.keymap.del({ "n" }, "<leader>e")
+vim.keymap.del({ "n" }, "<leader>h")
+vim.keymap.del({ "n" }, "<leader>v")
 
 vim.keymap.set({ "n", "v", "o" }, "a", "<Nop>")
 vim.keymap.set({ "n" }, "A", "<Nop>")
@@ -16,6 +18,10 @@ vim.keymap.set({ "n", "v" }, "<C-h>", "6h")
 vim.keymap.set({ "n", "v" }, "<C-j>", "3j")
 vim.keymap.set({ "n", "v" }, "<C-k>", "3k")
 vim.keymap.set({ "n", "v" }, "<C-l>", "6l")
+
+vim.keymap.set({ "t" }, "<esc>", "<C-\\><C-n>")
+
+vim.keymap.set({ "i" }, "<C-h>", "<C-w>")
 
 -- these mappings kind of suck actually
 

@@ -15,7 +15,7 @@ return {
 
   {
     "nvim-tree/nvim-tree.lua",
-    opts = require "configs.nvim-tree",
+    opts = require "configs.tree",
   },
 
   {
