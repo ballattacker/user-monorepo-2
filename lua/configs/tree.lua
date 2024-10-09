@@ -35,8 +35,8 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'Dd',       api.fs.remove,                        opts('Delete'))
 end
 
-local M = {}
-
-M.on_attach = on_attach
+local M = {
+  on_attach = on_attach,
+}
 
 return M

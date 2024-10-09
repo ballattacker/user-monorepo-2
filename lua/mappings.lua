@@ -1,4 +1,5 @@
 require "nvchad.mappings"
+require "utils"
 
 vim.keymap.del({ "n" }, "<tab>")
 vim.keymap.del({ "n" }, "<S-tab>")
@@ -42,3 +43,20 @@ vim.keymap.set({ "n" }, "eQ", ":quitall!<cr>")
 vim.keymap.set({ "n" }, "ex", function()
   require("nvchad.tabufline").closeAllBufs(false)
 end)
+
+vim.keymap.set({ "n" }, "<leader>gacm", function()
+  local msg = vim.fn.input "Commit message: "
+  if msg and msg ~= "" then
+    os.exec(string.format("git add --all && git commit -m '%s'", msg))
+  else
+    print "Commit aborted: No commit message provided."
+  end
+end, { desc = "git add commit" })
+vim.keymap.set({ "n" }, "<leader>gacp", function()
+  local msg = vim.fn.input "Commit message (push): "
+  if msg and msg ~= "" then
+    os.exec(string.format("git add --all && git commit -m '%s' && git push", msg))
+  else
+    print "Commit aborted: No commit message provided."
+  end
+end, { desc = "git add commit push" })
