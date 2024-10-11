@@ -37,6 +37,10 @@ end
 
 local M = {
   on_attach = on_attach,
+
+	git = {
+		ignore = false,
+	},
 }
 
 return M
