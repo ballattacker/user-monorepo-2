@@ -27,6 +27,7 @@ vim.keymap.set({ "t" }, "<esc>", "<C-\\><C-n>")
 vim.keymap.set({ "n", "v" }, "D", '"_d')
 vim.keymap.set({ "n", "v" }, "C", '"_c')
 
+-- navigation
 vim.keymap.set({ "n" }, "eh", function()
   require("nvchad.tabufline").prev()
 end)
@@ -42,6 +43,7 @@ vim.keymap.set({ "n" }, "ex", function()
   require("nvchad.tabufline").closeAllBufs(false)
 end)
 
+-- git
 vim.keymap.set({ "n" }, "<leader>gacm", function()
   local msg = vim.fn.input "Commit message: "
   if msg and msg ~= "" then
