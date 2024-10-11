@@ -58,3 +58,10 @@ vim.keymap.set({ "n" }, "<leader>gacp", function()
     print "Commit aborted: No commit message provided."
   end
 end, { desc = "git add commit push" })
+
+vim.keymap.set({ "n" }, "<leader>hxi", function()
+  require("hex").dump()
+end, { desc = "Edit in hex on" })
+vim.keymap.set({ "n" }, "<leader>hxo", function()
+  require("hex").assemble()
+end, { desc = "Edit in hex off" })
