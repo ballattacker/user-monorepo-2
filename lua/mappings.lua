@@ -61,6 +61,10 @@ vim.keymap.set({ "n" }, "<leader>gacp", function()
   end
 end, { desc = "git add commit push" })
 
+vim.keymap.set({ "n" }, "sf", function()
+  require("hop").hint_char1()
+end, { desc = "HopChar1" })
+
 vim.keymap.set({ "n" }, "<leader>hxi", function()
   require("hex").dump()
 end, { desc = "Edit in hex on" })
