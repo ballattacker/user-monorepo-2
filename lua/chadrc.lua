@@ -22,28 +22,24 @@ M.ui = {
   statusline = {
     theme = "vscode_colored",
     separator_style = "default",
-    -- https://nvchad.com/docs/config/nvchad_ui#override_statusline_modules
-    -- https://github.com/NvChad/ui/blob/6c22f52568c4ab080a6676f7bb6515f0076e6567/lua/nvchad/statusline/vscode_colored.lua#L55
-    overriden_modules = function(modules)
-      modules[2] = (function()
-        local fn = vim.fn
-        local icon = " 󰈚 "
-        local filename = (fn.expand "%" == "" and "Empty ") or fn.expand "%:." -- relative path
+    modules = {
+      file = function()
+        local icon = "󰈚"
+        local path = (vim.fn.expand "%" == "" and "Empty") or vim.fn.expand "%:." -- relative path
+        local name = (path == "" and "Empty") or path:match "([^/\\]+)[/\\]*$"
 
-        if filename ~= "Empty " then
+        if name ~= "Empty" then
           local devicons_present, devicons = pcall(require, "nvim-web-devicons")
 
           if devicons_present then
-            local ft_icon = devicons.get_icon(filename)
-            icon = (ft_icon ~= nil and " " .. ft_icon) or ""
+            local ft_icon = devicons.get_icon(name)
+            icon = (ft_icon ~= nil and ft_icon) or icon
           end
-
-          filename = " " .. filename .. " "
         end
 
-        return "%#StText# " .. icon .. filename
-      end)()
-    end,
+        return table.concat({ "%#StText#", icon, path, "" }, " ")
+      end,
+    },
   },
 }
 
