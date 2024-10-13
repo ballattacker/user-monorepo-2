@@ -52,6 +52,24 @@ local M = {
   -- },
 
   {
+    "klen/nvim-config-local",
+    lazy = false,
+    -- priority = 60,
+    config = function()
+      vim.g.config_local = {}
+      require("config-local").setup {
+        -- Default configuration (optional)
+        config_files = { ".vimrc", ".nvim/init.lua" }, -- Config file patterns to load (lua supported)
+        hashfile = vim.fn.stdpath "data" .. "/config-local", -- Where the plugin keeps files data
+        autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
+        commands_create = true, -- Create commands (ConfigSource, ConfigEdit, ConfigTrust, ConfigIgnore)
+        silent = false, -- Disable plugin messages (Config loaded/ignored)
+        lookup_parents = false, -- Lookup config files in parent directories
+      }
+    end,
+  },
+
+  {
     "smoka7/hop.nvim",
     version = "v2", -- optional but strongly recommended
     config = function()
@@ -124,31 +142,31 @@ local M = {
     end,
   },
 
-	-- {
-	-- 	"NeogitOrg/neogit",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim", -- required
-	-- 		"sindrets/diffview.nvim", -- optional - Diff integration
-	--
-	-- 		-- Only one of these is needed, not both.
-	-- 		"nvim-telescope/telescope.nvim", -- optional
-	-- 		-- "ibhagwan/fzf-lua", -- optional
-	-- 	},
-	-- 	config = true,
-	-- 	cmd = "Neogit",
-	-- },
+  -- {
+  -- 	"NeogitOrg/neogit",
+  -- 	dependencies = {
+  -- 		"nvim-lua/plenary.nvim", -- required
+  -- 		"sindrets/diffview.nvim", -- optional - Diff integration
+  --
+  -- 		-- Only one of these is needed, not both.
+  -- 		"nvim-telescope/telescope.nvim", -- optional
+  -- 		-- "ibhagwan/fzf-lua", -- optional
+  -- 	},
+  -- 	config = true,
+  -- 	cmd = "Neogit",
+  -- },
 
-	{
-		"RaafatTurki/hex.nvim",
-		config = function(_, _)
-			require("hex").setup()
-		end,
-	},
+  {
+    "RaafatTurki/hex.nvim",
+    config = function(_, _)
+      require("hex").setup()
+    end,
+  },
 
-	{
-		"gpanders/nvim-parinfer",
-		ft = { "lisp" },
-	},
+  {
+    "gpanders/nvim-parinfer",
+    ft = { "lisp" },
+  },
 }
 
 table.push(M, require "plugins.cmp")
