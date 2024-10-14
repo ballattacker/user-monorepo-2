@@ -26,6 +26,7 @@ vim.keymap.set({ "t" }, "<esc>", "<C-\\><C-n>")
 
 vim.keymap.set({ "n", "v" }, "D", '"_d')
 vim.keymap.set({ "n", "v" }, "C", '"_c')
+vim.keymap.set({ "n", "v" }, "U", "<C-r>")
 
 -- navigation
 vim.keymap.set({ "n" }, "eh", function()

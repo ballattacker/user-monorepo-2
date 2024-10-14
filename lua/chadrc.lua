@@ -43,6 +43,15 @@ M.ui = {
   },
 }
 
+M.term = {
+  float = {
+    row = 0.2,
+    col = 0.0,
+    width = 1.0,
+    height = 0.6,
+  },
+}
+
 M.colorify = {
   mode = "bg", -- fg, bg, virtual
 }
