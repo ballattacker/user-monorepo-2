@@ -19,6 +19,7 @@
   "hop.nvim": { "branch": "master", "commit": "8f51ef02700bb3cdcce94e92eff16170a6343c4f" },
   "indent-blankline.nvim": { "branch": "master", "commit": "e7a4442e055ec953311e77791546238d1eaae507" },
   "lazy.nvim": { "branch": "main", "commit": "1159bdccd8910a0fd0914b24d6c3d186689023d9" },
+  "legendary.nvim": { "branch": "master", "commit": "d2665ca760253c087a217b5e3968bbcc98f074de" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "menu": { "branch": "main", "commit": "349930b98590f10784e66340963aad2b4bf862c7" },
   "minty": { "branch": "main", "commit": "7c2a6452922313e10ff46aea49a4bb5e50e1ac68" },
