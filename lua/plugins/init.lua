@@ -41,16 +41,6 @@ local M = {
     },
   },
 
-  -- {
-  -- 	"NvChad/nvterm",
-  -- 	opts = overrides.nvterm,
-  -- },
-  --
-  -- {
-  -- 	"nvim-telescope/telescope.nvim",
-  -- 	opts = overrides.telescope,
-  -- },
-
   {
     "klen/nvim-config-local",
     lazy = false,
@@ -166,6 +156,17 @@ local M = {
   {
     "gpanders/nvim-parinfer",
     ft = { "lisp" },
+  },
+
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+    keys = {
+      { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
+    },
   },
 }
 
