@@ -8,6 +8,7 @@ local servers = {
   "html",
   "cssls",
   "ts_ls",
+  "fennel_language_server",
 }
 local nvlsp = require "nvchad.configs.lspconfig"
 

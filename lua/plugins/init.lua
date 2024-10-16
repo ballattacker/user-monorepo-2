@@ -155,7 +155,7 @@ local M = {
 
   {
     "gpanders/nvim-parinfer",
-    ft = { "lisp" },
+    ft = { "lisp", "fennel" },
   },
 
   {
