@@ -9,6 +9,7 @@ local options = {
     typescript = { "prettier" },
     typescriptreact = { "prettier" },
 
+    fennel = { "fnlfmt" },
     elixir = { "mix" },
   },
 

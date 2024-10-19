@@ -8,7 +8,6 @@ local servers = {
   "html",
   "cssls",
   "ts_ls",
-  "fennel_language_server",
 }
 local nvlsp = require "nvchad.configs.lspconfig"
 
@@ -27,3 +26,23 @@ end
 --   on_init = nvlsp.on_init,
 --   capabilities = nvlsp.capabilities,
 -- }
+
+lspconfig.fennel_language_server.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  -- https://miguelcrespo.co/posts/configuring-neovim-with-fennel/
+  settings = {
+    fennel = {
+      workspace = {
+        -- If you are using hotpot.nvim or aniseed,
+        -- make the server aware of neovim runtime files.
+        library = vim.api.nvim_list_runtime_paths(),
+        checkThirdParty = false, -- THIS IS THE IMPORTANT LINE TO ADD
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
+}

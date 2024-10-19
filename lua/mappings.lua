@@ -43,6 +43,16 @@ vim.keymap.set({ "n" }, "eQ", ":quitall!<cr>")
 vim.keymap.set({ "n" }, "ex", function()
   require("nvchad.tabufline").closeAllBufs(false)
 end)
+vim.keymap.set({ "n" }, "<C-w>e", function()
+  require("nvim-tree.api").tree.focus()
+end)
+vim.keymap.set({ "n" }, "<C-w><C-e>", function()
+  require("nvim-tree.api").tree.focus()
+end)
+
+vim.keymap.set({ "n" }, "<leader>i", function()
+  vim.lsp.buf.hover()
+end, { desc = "lsp hover" })
 
 -- git
 vim.keymap.set({ "n" }, "<leader>gacm", function()
