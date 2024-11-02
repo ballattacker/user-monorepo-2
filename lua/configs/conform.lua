@@ -4,10 +4,11 @@ local options = {
     -- css = { "prettier" },
     -- html = { "prettier" },
 
-    javascript = { "prettier" },
-    javascriptreact = { "prettier" },
-    typescript = { "prettier" },
-    typescriptreact = { "prettier" },
+    javascript = { "deno_fmt" },
+    javascriptreact = { "deno_fmt" },
+    typescript = { "deno_fmt" },
+    typescriptreact = { "deno_fmt" },
+    json = { "deno_fmt" },
 
     fennel = { "fnlfmt" },
     elixir = { "mix" },
