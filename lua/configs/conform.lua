@@ -7,7 +7,7 @@ local options = {
     javascript = { "deno_fmt" },
     javascriptreact = { "deno_fmt" },
     typescript = { "deno_fmt" },
-    typescriptreact = { "deno_fmt" },
+    typescriptreact = { "deno_fmt", "rustywind" },
     json = { "deno_fmt" },
 
     fennel = { "fnlfmt" },

@@ -8,6 +8,7 @@ local servers = {
   "html",
   "cssls",
   "ts_ls",
+  "tailwindcss",
 }
 local nvlsp = require "nvchad.configs.lspconfig"
 
