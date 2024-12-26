@@ -5,7 +5,7 @@ require "nvchad.options"
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
-vim.opt.shell = "/opt/homebrew/bin/zsh"
+vim.opt.shell = "/usr/bin/zsh"
 
 vim.opt.timeout = false
 
