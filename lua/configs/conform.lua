@@ -12,6 +12,7 @@ local options = {
 
     fennel = { "fnlfmt" },
     elixir = { "mix" },
+    sh = { "shfmt" },
   },
 
   -- format_on_save = {

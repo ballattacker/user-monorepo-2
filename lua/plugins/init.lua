@@ -16,6 +16,12 @@ local M = {
   },
 
   {
+    "creativenull/efmls-configs-nvim",
+    -- version = "v1.9.0", -- version is optional, but recommended
+    dependencies = { "neovim/nvim-lspconfig" },
+  },
+
+  {
     "nvim-tree/nvim-tree.lua",
     opts = require "configs.tree",
   },
@@ -51,7 +57,7 @@ local M = {
     lazy = false,
     config = function()
       require("nvim-treesitter.configs").setup {
-        enable_autocmd = false,
+        enable_autocmd = true,
       }
       local get_option = vim.filetype.get_option
       vim.filetype.get_option = function(filetype, option)
