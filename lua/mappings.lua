@@ -3,6 +3,7 @@ require "utils"
 
 vim.keymap.del({ "n" }, "<tab>")
 vim.keymap.del({ "n" }, "<S-tab>")
+vim.keymap.del({ "n" }, "<leader>b")
 vim.keymap.del({ "n" }, "<leader>e")
 vim.keymap.del({ "n" }, "<leader>h")
 vim.keymap.del({ "n" }, "<leader>v")
