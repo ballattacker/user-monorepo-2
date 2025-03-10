@@ -6,7 +6,7 @@ local M = {
     opts = function(_, opts)
       table.push(opts.sources, {
         { name = "cmp_tabnine" },
-        { name = "copilot" },
+        -- { name = "copilot" },
       })
 
       local has_words_before = function()
@@ -51,53 +51,53 @@ local M = {
           tabnine:setup {} -- put your options here
         end,
       },
-      "zbirenbaum/copilot-cmp",
+      -- "zbirenbaum/copilot-cmp",
     },
   },
 
   -- https://tamerlan.dev/setting-up-copilot-in-neovim-with-sane-settings/
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function(_, _)
-      require("copilot").setup {
-        suggestion = {
-          -- enabled = false,
-          auto_trigger = true,
-          keymap = {
-            accept = "<C-G><C-H><C-L>",
-            accept_word = false,
-            accept_line = false,
-            next = "<C-G><C-H><C-J>",
-            prev = "<C-G><C-H><C-K>",
-            dismiss = "<C-G><C-H><C-H>",
-          },
-        },
-        panel = {
-          -- enabled = false,
-          auto_refresh = true,
-          keymap = {
-            jump_prev = "[[",
-            jump_next = "]]",
-            accept = "<CR>",
-            refresh = "<C-G><C-H><C-R>",
-            open = "<C-G><C-H><C-O>",
-          },
-        },
-      }
-      vim.keymap.set("i", "<C-G><C-H><C-I>", function()
-        require("copilot.suggestion").dismiss()
-        require("copilot.suggestion").toggle_auto_trigger()
-      end)
-    end,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup()
-    end,
-  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function(_, _)
+  --     require("copilot").setup {
+  --       suggestion = {
+  --         -- enabled = false,
+  --         auto_trigger = true,
+  --         keymap = {
+  --           accept = "<C-G><C-H><C-L>",
+  --           accept_word = false,
+  --           accept_line = false,
+  --           next = "<C-G><C-H><C-J>",
+  --           prev = "<C-G><C-H><C-K>",
+  --           dismiss = "<C-G><C-H><C-H>",
+  --         },
+  --       },
+  --       panel = {
+  --         -- enabled = false,
+  --         auto_refresh = true,
+  --         keymap = {
+  --           jump_prev = "[[",
+  --           jump_next = "]]",
+  --           accept = "<CR>",
+  --           refresh = "<C-G><C-H><C-R>",
+  --           open = "<C-G><C-H><C-O>",
+  --         },
+  --       },
+  --     }
+  --     vim.keymap.set("i", "<C-G><C-H><C-I>", function()
+  --       require("copilot.suggestion").dismiss()
+  --       require("copilot.suggestion").toggle_auto_trigger()
+  --     end)
+  --   end,
+  -- },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --   end,
+  -- },
 }
 
 return M
