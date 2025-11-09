@@ -13,6 +13,7 @@ local options = {
     fennel = { "fnlfmt" },
     elixir = { "mix" },
     sh = { "shfmt" },
+    -- python = { "isort", "black" },
   },
 
   -- format_on_save = {
