@@ -51,12 +51,11 @@ vim.keymap.set({ "n" }, "<C-w><C-e>", function()
   require("nvim-tree.api").tree.focus()
 end)
 
-vim.keymap.set({ "n" }, "<leader>i", function()
+vim.keymap.set({ "n" }, "grk", function()
   vim.lsp.buf.hover()
 end, { desc = "lsp hover" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Actions" })
 vim.keymap.set({ "n", "v" }, "<leader>fm", function()
-  require("conform").format { lsp_fallback = true }
+  require("conform").format()
 end, { desc = "general format file" })
 
 -- git

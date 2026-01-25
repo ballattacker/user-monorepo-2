@@ -5,9 +5,10 @@ require("nvchad.configs.lspconfig").defaults()
 local servers = {
   "efm", -- general purpose -- for shell
   "fennel_language_server",
+  "yamlls",
+  "taplo", -- toml
   "html",
   "ts_ls",
-  "taplo", -- toml
 }
 
 vim.lsp.enable(servers)

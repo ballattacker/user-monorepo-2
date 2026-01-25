@@ -1,21 +1,20 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    css = { "prettier" },
+    fennel = { "fnlfmt" },
+    sh = { "shfmt" },
+
     html = { "prettier" },
+    markdown = { "deno_fmt" },
+
+    json = { "deno_fmt" },
+    yaml = { "yamlfmt" },
+    toml = { "taplo" },
 
     javascript = { "deno_fmt" },
     javascriptreact = { "deno_fmt" },
     typescript = { "deno_fmt" },
     typescriptreact = { "deno_fmt", "rustywind" },
-    json = { "deno_fmt" },
-
-    fennel = { "fnlfmt" },
-    go = { "gofmt" },
-    elixir = { "mix" },
-    sh = { "shfmt" },
-    -- python = { "isort", "black" },
-    markdown = { "deno_fmt" },
   },
 
   -- format_on_save = {
