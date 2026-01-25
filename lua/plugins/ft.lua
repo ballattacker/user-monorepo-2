@@ -1,16 +1,22 @@
 local M = {
   {
     "RaafatTurki/hex.nvim",
-    config = function(_, _)
-      require("hex").setup()
-
-      vim.keymap.set({ "n" }, "<leader>hxi", function()
-        require("hex").dump()
-      end, { desc = "Edit in hex on" })
-      vim.keymap.set({ "n" }, "<leader>hxo", function()
-        require("hex").assemble()
-      end, { desc = "Edit in hex off" })
-    end,
+    keys = {
+      {
+        "<leader>hxi",
+        function()
+          require("hex").dump()
+        end,
+        desc = "Edit in hex on",
+      },
+      {
+        "<leader>hxo",
+        function()
+          require("hex").assemble()
+        end,
+        desc = "Edit in hex off",
+      },
+    },
   },
 
   {

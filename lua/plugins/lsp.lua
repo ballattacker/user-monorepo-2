@@ -19,12 +19,35 @@ local M = {
   },
 
   {
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      "mason-org/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    opts = {
+      ensure_installed = {
+        "lua_ls",
+        "stylua",
+        "bashls",
+        "shellcheck",
+        "shfmt",
+        "yaml-language-server",
+        "yamlfmt",
+        "taplo",
+        "deno",
+        "prettier",
+        "html-language-server",
+        "typescript-language-server",
+      },
+    },
+  },
+
+  {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        fennel = { "fnlfmt" },
         sh = { "shfmt" },
 
         html = { "prettier" },
@@ -46,11 +69,16 @@ local M = {
       --   lsp_fallback = true,
       -- },
     },
-    config = function()
-      vim.keymap.set({ "n", "v" }, "<leader>fm", function()
-        require("conform").format()
-      end, { desc = "general format file" })
-    end,
+    keys = {
+      {
+        "<leader>fm",
+        function()
+          require("conform").format()
+        end,
+        desc = "general format file",
+        mode = { "n", "v" },
+      },
+    },
   },
 
   {
@@ -83,12 +111,18 @@ local M = {
       { "nvim-telescope/telescope.nvim" },
     },
     event = "LspAttach",
-    opts = {},
-    config = function()
-      vim.keymap.set({ "n", "x" }, "gra", function()
-        require("tiny-code-action").code_action()
-      end, { desc = "tiny-code-action.code_action()", noremap = true, silent = true })
-    end,
+    keys = {
+      {
+        "gra",
+        function()
+          require("tiny-code-action").code_action()
+        end,
+        mode = { "n", "x" },
+        desc = "tiny-code-action.code_action()",
+        noremap = true,
+        silent = true,
+      },
+    },
   },
 }
 
