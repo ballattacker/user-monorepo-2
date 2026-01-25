@@ -3,7 +3,8 @@ require("nvchad.configs.lspconfig").defaults()
 -- only specify for frequently opened single file language
 -- or common/system servers
 local servers = {
-  "efm", -- general purpose -- for shell
+  -- "bashls", -- need shellcheck, shfmt
+  "efm", -- general purpose
   "fennel_language_server",
   "yamlls",
   "taplo", -- toml
