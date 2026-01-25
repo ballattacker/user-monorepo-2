@@ -1,0 +1,93 @@
+local M = {
+  {
+    "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter-context",
+        config = function(_, _)
+          require("treesitter-context").setup {
+            enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+            max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
+            min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+            line_numbers = true,
+            multiline_threshold = 20, -- Maximum number of lines to show for a single context
+            trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+            mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
+            -- Separator between context and content. Should be a single character string, like '-'.
+            -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+            separator = "^",
+            zindex = 20, -- The Z-index of the context window
+            on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+          }
+        end,
+      },
+    },
+    opts = require "configs.treesitter",
+  },
+
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    lazy = false,
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        enable_autocmd = true,
+      }
+      local get_option = vim.filetype.get_option
+      vim.filetype.get_option = function(filetype, option)
+        return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
+          or get_option(filetype, option)
+      end
+    end,
+  },
+
+  {
+    "NMAC427/guess-indent.nvim",
+    lazy = false,
+    config = function()
+      require("guess-indent").setup {}
+    end,
+  },
+
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    lazy = false,
+    config = function(_, _)
+      -- This module contains a number of default definitions
+      local rainbow_delimiters = require "rainbow-delimiters"
+
+      ---@type rainbow_delimiters.config
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [""] = rainbow_delimiters.strategy["global"],
+          vim = rainbow_delimiters.strategy["local"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+        },
+        priority = {
+          [""] = 110,
+          lua = 210,
+        },
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          -- "RainbowDelimiterOrange",
+          -- "RainbowDelimiterGreen",
+          -- "RainbowDelimiterViolet",
+          -- "RainbowDelimiterCyan",
+        },
+      }
+    end,
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
+}
+
+return M
