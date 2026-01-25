@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 -- or common/system servers
 local servers = {
   -- "bashls", -- need shellcheck, shfmt
-  "efm", -- general purpose
+  -- "efm", -- general purpose
   "fennel_language_server",
   "yamlls",
   "taplo", -- toml

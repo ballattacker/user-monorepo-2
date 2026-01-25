@@ -21,6 +21,27 @@ local M = {
   },
 
   {
+    "mfussenegger/nvim-lint",
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
+    config = function()
+      require "configs.lint"
+    end,
+  },
+
+  {
+    "rachartier/tiny-code-action.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+    event = "LspAttach",
+    opts = {},
+  },
+
+  {
     "klen/nvim-config-local",
     lazy = false,
     -- priority = 60,
