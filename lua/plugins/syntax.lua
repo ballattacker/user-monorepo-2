@@ -37,16 +37,6 @@ local M = {
 local auto = {
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
-    config = function()
-      require("nvim-treesitter.configs").setup {
-        enable_autocmd = true,
-      }
-      local get_option = vim.filetype.get_option
-      vim.filetype.get_option = function(filetype, option)
-        return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
-          or get_option(filetype, option)
-      end
-    end,
   },
 
   {
