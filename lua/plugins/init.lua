@@ -27,17 +27,12 @@ local M = {
   {
     "kevinhwang91/nvim-bqf",
     ft = "qf",
-    config = function(_, _)
-      -- https://github.com/kevinhwang91/nvim-bqf#setup-and-description
-      require("bqf").setup {}
-    end,
   },
 
   {
     "stevearc/oil.nvim",
     ---@module 'oil'
     ---@type oil.SetupOpts
-    opts = {},
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
     keys = {
       { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
