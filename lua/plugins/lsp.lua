@@ -8,7 +8,6 @@ local M = {
       -- or common/system servers
       local servers = {
         "bashls", -- need shellcheck, shfmt
-        "fennel_language_server",
         "yamlls",
         "taplo", -- toml
         "html",
