@@ -54,12 +54,6 @@ end)
 vim.keymap.set({ "n", "x" }, "grk", function()
   vim.lsp.buf.hover()
 end, { desc = "vim.lsp.buf.hover()" })
-vim.keymap.set({ "n", "x" }, "gra", function()
-  require("tiny-code-action").code_action()
-end, { desc = "tiny-code-action.code_action()", noremap = true, silent = true })
-vim.keymap.set({ "n", "v" }, "<leader>fm", function()
-  require("conform").format()
-end, { desc = "general format file" })
 
 -- git
 vim.keymap.set({ "n" }, "<leader>gacm", function()

@@ -2,46 +2,6 @@ require "utils"
 
 local M = {
   {
-    "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
-    opts = require "configs.conform",
-  },
-
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require "configs.lspconfig"
-    end,
-  },
-
-  {
-    "creativenull/efmls-configs-nvim",
-    -- version = "v1.9.0", -- version is optional, but recommended
-    dependencies = { "neovim/nvim-lspconfig" },
-  },
-
-  {
-    "mfussenegger/nvim-lint",
-    event = {
-      "BufReadPre",
-      "BufNewFile",
-    },
-    config = function()
-      require "configs.lint"
-    end,
-  },
-
-  {
-    "rachartier/tiny-code-action.nvim",
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim" },
-    },
-    event = "LspAttach",
-    opts = {},
-  },
-
-  {
     "klen/nvim-config-local",
     lazy = false,
     -- priority = 60,
@@ -65,22 +25,6 @@ local M = {
   },
 
   {
-    "lewis6991/gitsigns.nvim",
-    lazy = false,
-    opts = {
-      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-      current_line_blame_opts = {
-        virt_text = true,
-        virt_text_pos = "right_align", -- 'eol' | 'overlay' | 'right_align'
-        delay = 0,
-        ignore_whitespace = false,
-        virt_text_priority = 100,
-        use_focus = true,
-      },
-    },
-  },
-
-  {
     "kevinhwang91/nvim-bqf",
     ft = "qf",
     config = function(_, _)
@@ -88,25 +32,6 @@ local M = {
       require("bqf").setup {}
     end,
   },
-
-  {
-    "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-  },
-
-  -- {
-  -- 	"NeogitOrg/neogit",
-  -- 	dependencies = {
-  -- 		"nvim-lua/plenary.nvim", -- required
-  -- 		"sindrets/diffview.nvim", -- optional - Diff integration
-  --
-  -- 		-- Only one of these is needed, not both.
-  -- 		"nvim-telescope/telescope.nvim", -- optional
-  -- 		-- "ibhagwan/fzf-lua", -- optional
-  -- 	},
-  -- 	config = true,
-  -- 	cmd = "Neogit",
-  -- },
 
   {
     "RaafatTurki/hex.nvim",
@@ -173,6 +98,8 @@ local M = {
   },
 }
 
+table.push(M, require "plugins.git")
+table.push(M, require "plugins.lsp")
 table.push(M, require "plugins.cmp")
 table.push(M, require "plugins.syntax")
 
