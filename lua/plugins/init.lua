@@ -60,16 +60,6 @@ local M = {
   },
 
   {
-    "smoka7/hop.nvim",
-    version = "v2", -- optional but strongly recommended
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      -- require'hop'.setup { keys = 'lsahgieowpqnvmcurkdjf' }
-      require("hop").setup { keys = "eiwosla;mcvnqpjfkd" }
-    end,
-  },
-
-  {
     "kevinhwang91/nvim-bqf",
     ft = "qf",
     config = function(_, _)
@@ -101,6 +91,13 @@ local M = {
     "RaafatTurki/hex.nvim",
     config = function(_, _)
       require("hex").setup()
+
+      vim.keymap.set({ "n" }, "<leader>hxi", function()
+        require("hex").dump()
+      end, { desc = "Edit in hex on" })
+      vim.keymap.set({ "n" }, "<leader>hxo", function()
+        require("hex").assemble()
+      end, { desc = "Edit in hex off" })
     end,
   },
 
