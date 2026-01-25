@@ -54,6 +54,7 @@ end)
 vim.keymap.set({ "n" }, "<leader>i", function()
   vim.lsp.buf.hover()
 end, { desc = "lsp hover" })
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Actions" })
 vim.keymap.set({ "n", "v" }, "<leader>fm", function()
   require("conform").format { lsp_fallback = true }
 end, { desc = "general format file" })

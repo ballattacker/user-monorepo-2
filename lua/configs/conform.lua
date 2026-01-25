@@ -11,9 +11,11 @@ local options = {
     json = { "deno_fmt" },
 
     fennel = { "fnlfmt" },
+    go = { "gofmt" },
     elixir = { "mix" },
     sh = { "shfmt" },
     -- python = { "isort", "black" },
+    markdown = { "deno_fmt" },
   },
 
   -- format_on_save = {
