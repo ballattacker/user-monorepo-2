@@ -3,8 +3,20 @@ require "utils"
 local M = {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
+    main = 'nvim-treesitter.configs',
+    config = function (_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+      require("nvim-treesitter.install").prefer_git = true
+    end,
     opts = {
       auto_install = true,
+      highlight = {
+        enable = true,
+      },
+      incremental_selection = {
+        enable = true,
+      },
       indent = {
         enable = true,
         disable = {
