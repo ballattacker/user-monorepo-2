@@ -18,29 +18,30 @@ local M = {
     end,
   },
 
-  {
-    "mason-org/mason-lspconfig.nvim",
-    dependencies = {
-      "mason-org/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    opts = {
-      ensure_installed = {
-        "lua_ls",
-        "stylua",
-        "bashls",
-        "shellcheck",
-        "shfmt",
-        "yaml-language-server",
-        "yamlfmt",
-        "taplo",
-        "deno",
-        "prettier",
-        "html-language-server",
-        "typescript-language-server",
-      },
-    },
-  },
+  -- just run :MasonInstallAll
+  -- {
+  --   "mason-org/mason-lspconfig.nvim",
+  --   dependencies = {
+  --     "mason-org/mason.nvim",
+  --     "neovim/nvim-lspconfig",
+  --   },
+  --   opts = {
+  --     ensure_installed = {
+  --       "lua_ls",
+  --       "stylua",
+  --       "bashls",
+  --       "shellcheck",
+  --       "shfmt",
+  --       "yaml-language-server",
+  --       "yamlfmt",
+  --       "taplo",
+  --       "deno",
+  --       "prettier",
+  --       "html-language-server",
+  --       "typescript-language-server",
+  --     },
+  --   },
+  -- },
 
   {
     "stevearc/conform.nvim",

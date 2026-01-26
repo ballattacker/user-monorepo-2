@@ -1,5 +1,3 @@
-require "utils"
-
 local M = {
   {
     "klen/nvim-config-local",
@@ -50,11 +48,5 @@ local M = {
     -- dependencies = { 'kkharji/sqlite.lua' }
   },
 }
-
-table.push(M, require "plugins.git")
-table.push(M, require "plugins.lsp")
-table.push(M, require "plugins.cmp")
-table.push(M, require "plugins.syntax")
-table.push(M, require "plugins.ft")
 
 return M
