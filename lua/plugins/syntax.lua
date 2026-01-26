@@ -46,9 +46,9 @@ local auto = {
     },
   },
 
-  {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-  },
+  -- {
+  --   "JoosepAlviste/nvim-ts-context-commentstring",
+  -- },
 
   {
     "NMAC427/guess-indent.nvim",
