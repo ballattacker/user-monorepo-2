@@ -8,6 +8,7 @@ local M = {
     config = function (_, opts)
       require("nvim-treesitter.configs").setup(opts)
       require("nvim-treesitter.install").prefer_git = true
+      require('nvim-treesitter.install').compilers = { "zig" }
     end,
     opts = {
       auto_install = true,
