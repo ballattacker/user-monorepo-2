@@ -6,7 +6,21 @@
 local M = {}
 
 M.base46 = {
+  -- theme = "dark_horizon",
+  -- theme = "doomchad",
+  -- theme = "eldritch",
+  -- theme = "everblush",
+  -- theme = "gatekeeper",
+  -- theme = "hiberbee",
+  -- theme = "horizon",
   theme = "kanagawa",
+  -- theme = "nightowl",
+  -- theme = "oceanic-next",
+  -- theme = "onedark",
+  -- theme = "palenight",
+  -- theme = "pastelDark",
+  -- theme = "tokyonight",
+  -- theme = "vesper",
   transparency = true,
 
   -- hl_override = {
