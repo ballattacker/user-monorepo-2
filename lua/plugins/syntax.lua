@@ -4,11 +4,11 @@ local M = {
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "master",
-    main = 'nvim-treesitter.configs',
-    config = function (_, opts)
+    main = "nvim-treesitter.configs",
+    config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
       require("nvim-treesitter.install").prefer_git = true
-      require('nvim-treesitter.install').compilers = { "zig" }
+      require("nvim-treesitter.install").compilers = { "zig" }
     end,
     opts = {
       auto_install = true,
@@ -57,35 +57,29 @@ local auto = {
 
   {
     "HiPhish/rainbow-delimiters.nvim",
-    config = function(_, _)
-      -- This module contains a number of default definitions
-      local rainbow_delimiters = require "rainbow-delimiters"
+    config = function(_, opts)
+      require("rainbow-delimiters.setup").setup(opts)
 
-      ---@type rainbow_delimiters.config
-      vim.g.rainbow_delimiters = {
-        strategy = {
-          [""] = rainbow_delimiters.strategy["global"],
-          vim = rainbow_delimiters.strategy["local"],
-        },
-        query = {
-          [""] = "rainbow-delimiters",
-          lua = "rainbow-blocks",
-        },
-        priority = {
-          [""] = 110,
-          lua = 210,
-        },
-        highlight = {
-          "RainbowDelimiterRed",
-          "RainbowDelimiterYellow",
-          "RainbowDelimiterBlue",
-          -- "RainbowDelimiterOrange",
-          -- "RainbowDelimiterGreen",
-          -- "RainbowDelimiterViolet",
-          -- "RainbowDelimiterCyan",
-        },
-      }
+      vim.api.nvim_create_autocmd("ColorSchemePre", {
+        pattern = "*",
+        callback = function()
+          vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { link = "NvChHeadRed" })
+          vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { link = "NvChHeadYellow" })
+          vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { link = "NvChHeadBlue" })
+        end,
+      })
     end,
+    opts = {
+      highlight = {
+        "RainbowDelimiterRed",
+        "RainbowDelimiterYellow",
+        "RainbowDelimiterBlue",
+        -- "RainbowDelimiterOrange",
+        -- "RainbowDelimiterGreen",
+        -- "RainbowDelimiterViolet",
+        -- "RainbowDelimiterCyan",
+      },
+    },
   },
 
   {
