@@ -54,6 +54,9 @@ end)
 vim.keymap.set({ "n", "x" }, "grk", function()
   vim.lsp.buf.hover()
 end, { desc = "vim.lsp.buf.hover()" })
+vim.keymap.set({ "n", "x" }, "grd", function()
+  vim.lsp.buf.definition()
+end, { desc = "vim.lsp.buf.definition()" })
 
 -- git
 vim.keymap.set({ "n" }, "<leader>gacm", function()
