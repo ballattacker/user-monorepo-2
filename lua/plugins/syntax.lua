@@ -71,8 +71,8 @@ local auto = {
     opts = {
       highlight = {
         "RainbowDelimiterRed",
-        "RainbowDelimiterYellow",
-        "RainbowDelimiterBlue",
+        "RainbowDelimiterOrange",
+        "RainbowDelimiterGreen",
       },
     },
   },
