@@ -60,20 +60,19 @@ local auto = {
     config = function(_, opts)
       require("rainbow-delimiters.setup").setup(opts)
 
-      dofile(vim.g.base46_cache .. "rainbowdelimiters")
-      -- vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { link = "NvChHeadRed" })
-      -- vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { link = "NvChHeadYellow" })
-      -- vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { link = "NvChHeadBlue" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { link = "Base46FgRed" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", { link = "Base46FgOrange" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { link = "Base46FgYellow" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { link = "Base46FgGreen" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { link = "Base46FgCyan" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { link = "Base46FgBlue" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { link = "Base46FgPurple" })
     end,
     opts = {
       highlight = {
         "RainbowDelimiterRed",
         "RainbowDelimiterYellow",
         "RainbowDelimiterBlue",
-        -- "RainbowDelimiterOrange",
-        -- "RainbowDelimiterGreen",
-        -- "RainbowDelimiterViolet",
-        -- "RainbowDelimiterCyan",
       },
     },
   },

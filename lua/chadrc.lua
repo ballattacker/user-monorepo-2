@@ -23,13 +23,14 @@ M.base46 = {
   -- theme = "vesper",
   transparency = true,
 
-  -- hl_override = {
-  -- 	Comment = { italic = true },
-  -- 	["@comment"] = { italic = true },
-  -- },
-
-  integrations = {
-    "rainbowdelimiters",
+  hl_add = {
+    ["Base46FgRed"] = { fg = "red" },
+    ["Base46FgOrange"] = { fg = "orange" },
+    ["Base46FgYellow"] = { fg = "yellow" },
+    ["Base46FgGreen"] = { fg = "green" },
+    ["Base46FgCyan"] = { fg = "cyan" },
+    ["Base46FgBlue"] = { fg = "blue" },
+    ["Base46FgPurple"] = { fg = "purple" },
   },
 }
 
