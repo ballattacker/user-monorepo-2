@@ -60,14 +60,10 @@ local auto = {
     config = function(_, opts)
       require("rainbow-delimiters.setup").setup(opts)
 
-      vim.api.nvim_create_autocmd("ColorSchemePre", {
-        pattern = "*",
-        callback = function()
-          vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { link = "NvChHeadRed" })
-          vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { link = "NvChHeadYellow" })
-          vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { link = "NvChHeadBlue" })
-        end,
-      })
+      dofile(vim.g.base46_cache .. "rainbowdelimiters")
+      -- vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { link = "NvChHeadRed" })
+      -- vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { link = "NvChHeadYellow" })
+      -- vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { link = "NvChHeadBlue" })
     end,
     opts = {
       highlight = {

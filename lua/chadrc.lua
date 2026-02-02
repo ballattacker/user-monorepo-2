@@ -27,6 +27,10 @@ M.base46 = {
   -- 	Comment = { italic = true },
   -- 	["@comment"] = { italic = true },
   -- },
+
+  integrations = {
+    "rainbowdelimiters",
+  },
 }
 
 M.ui = {
