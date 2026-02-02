@@ -60,13 +60,13 @@ local auto = {
     config = function(_, opts)
       require("rainbow-delimiters.setup").setup(opts)
 
-      vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { link = "Base46FgRed" })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", { link = "Base46FgOrange" })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { link = "Base46FgYellow" })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { link = "Base46FgGreen" })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { link = "Base46FgCyan" })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { link = "Base46FgBlue" })
-      vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { link = "Base46FgPurple" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { link = "FgBase08" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", { link = "FgBase09" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { link = "FgBase0A" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { link = "FgBase0B" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { link = "FgBase0C" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { link = "FgBase0D" })
+      vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { link = "FgBase0E" })
     end,
     opts = {
       highlight = {
