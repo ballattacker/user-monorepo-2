@@ -8,22 +8,51 @@ local M = {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-      -- 'super-tab' for mappings similar to vscode (tab to accept)
-      -- 'enter' for enter to accept
-      -- 'none' for no mappings
-      --
-      -- All presets have the following mappings:
-      -- C-space: Open menu or open docs if already open
-      -- C-n/C-p or Up/Down: Select next/previous item
-      -- C-e: Hide menu
-      -- C-k: Toggle signature help (if signature.enabled = true)
-      --
-      -- See :h blink-cmp-config-keymap for defining your own keymap
-      keymap = { preset = "default" },
-      completion = { documentation = { auto_show = true } },
+      keymap = {
+        preset = "none",
+
+        ["<C-l>"] = { "show", "accept" },
+        ["<C-m>"] = { "accept_and_enter" },
+        ["<C-u>"] = { "hide", "fallback" },
+        ["<C-h>"] = {
+          function(cmp)
+            cmp.hide()
+            vim.api.nvim_input "<C-w>"
+            return true
+          end,
+        },
+
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+        ["<C-n>"] = { "select_next", "fallback_to_mappings" },
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-j>"] = { "select_next", "fallback" },
+
+        ["<C-d>"] = { "scroll_documentation_up", "scroll_signature_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "scroll_signature_down", "fallback" },
+
+        ["<Tab>"] = { "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "snippet_backward", "fallback" },
+
+        ["<C-i>"] = { "hide_documentation", "hide_signature", "hide", "fallback_to_mappings" },
+        ["<C-o>"] = { "show_documentation", "show_signature", "show", "fallback_to_mappings" },
+      },
+      completion = {
+        list = { selection = { preselect = true, auto_insert = false } },
+        documentation = { auto_show = true },
+        ghost_text = { enabled = true },
+      },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
+      },
+      -- signature = { enabled = true },
+      cmdline = {
+        completion = {
+          menu = { auto_show = true },
+          list = { selection = { preselect = true, auto_insert = false } },
+        },
+        keymap = { preset = "inherit" },
       },
     },
     opts_extend = { "sources.default" },
