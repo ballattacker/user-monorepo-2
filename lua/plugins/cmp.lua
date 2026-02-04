@@ -12,7 +12,10 @@ local M = {
         preset = "none",
 
         ["<C-l>"] = { "show", "accept" },
-        ["<C-m>"] = { "accept_and_enter" },
+        -- INFO: https://github.com/saghen/blink.cmp/issues/2119
+        -- ["<C-m>"] = { "accept_and_enter" },
+        -- INFO: override nvchad.blink.lazyspec
+        ["<CR>"] = { "fallback" },
         ["<C-u>"] = { "hide", "fallback" },
         ["<C-h>"] = {
           function(cmp)
