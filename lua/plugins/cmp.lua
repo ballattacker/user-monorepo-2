@@ -1,3 +1,4 @@
+-- TODO: add AI
 local M = {
   { import = "nvchad.blink.lazyspec" },
 
