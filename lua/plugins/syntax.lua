@@ -78,6 +78,7 @@ local auto = {
   },
 
   {
+    -- FIXME:
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
   },

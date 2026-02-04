@@ -2,6 +2,9 @@ local M = {
   { import = "nvchad.blink.lazyspec" },
 
   {
+    -- NOTE: need to download prebuilt binary manually because using `zig cc` leads to
+    -- `cc -dumpmachine` outputing `x86_64-unknown-linux-musl` which is wrong
+    -- https://github.com/saghen/blink.cmp/issues/160#issuecomment-2630207543
     "saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets" },
     version = "1.*",
@@ -12,7 +15,7 @@ local M = {
         preset = "none",
 
         ["<C-l>"] = { "show", "accept" },
-        -- INFO: https://github.com/saghen/blink.cmp/issues/2119
+        -- TODO: https://github.com/saghen/blink.cmp/issues/2119
         -- ["<C-m>"] = { "accept_and_enter" },
         -- INFO: override nvchad.blink.lazyspec
         ["<CR>"] = { "fallback" },
