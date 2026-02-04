@@ -48,6 +48,10 @@ M.ui = {
     lazyload = false,
   },
 
+  cmp = {
+    style = "atom_colored",
+  },
+
   statusline = {
     theme = "vscode_colored",
     separator_style = "default",
