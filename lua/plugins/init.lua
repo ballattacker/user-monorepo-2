@@ -30,26 +30,6 @@ local M = {
   },
 
   {
-    "nvim-tree/nvim-tree.lua",
-    opts = require "configs.tree",
-  },
-
-  {
-    "kevinhwang91/nvim-bqf",
-    ft = "qf",
-  },
-
-  {
-    "stevearc/oil.nvim",
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-    keys = {
-      { "-", "<cmd>Oil<cr>", desc = "Open parent directory" },
-    },
-  },
-
-  {
     "mrjones2014/legendary.nvim",
     version = "v2.13.9",
     -- since legendary.nvim handles all your keymaps/commands,

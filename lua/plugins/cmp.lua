@@ -80,27 +80,6 @@ local M = {
     },
     opts_extend = { "sources.default" },
   },
-
-  {
-    "nvim-telescope/telescope.nvim",
-    opts = {
-      defaults = {
-        mappings = {
-          i = {
-            ["<C-j>"] = "move_selection_next",
-            ["<C-k>"] = "move_selection_previous",
-            ["<C-d>"] = "preview_scrolling_down",
-            ["<C-u>"] = "preview_scrolling_up",
-            ["<C-h>"] = function()
-              vim.api.nvim_input "<C-w>"
-            end,
-            ["<C-l>"] = "select_default",
-            ["<C-m>"] = "select_default",
-          },
-        },
-      },
-    },
-  },
 }
 
 return M
