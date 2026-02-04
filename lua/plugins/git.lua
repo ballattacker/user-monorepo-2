@@ -1,5 +1,5 @@
 local M = {
-
+  -- TODO: move and add git keymaps here
   {
     "lewis6991/gitsigns.nvim",
     lazy = false,
