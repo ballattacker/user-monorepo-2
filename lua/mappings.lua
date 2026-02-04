@@ -62,7 +62,7 @@ end, { desc = "vim.lsp.buf.definition()" })
 vim.keymap.set({ "n" }, "<leader>gacm", function()
   local msg = vim.fn.input "Commit message: "
   if msg and msg ~= "" then
-    os.exec(string.format("git add --all && git commit -m '%s'", msg))
+    os.exec(string.format("git add --all && git commit -m %q", msg))
   else
     print "Commit aborted: No commit message provided."
   end
@@ -70,7 +70,7 @@ end, { desc = "git add commit" })
 vim.keymap.set({ "n" }, "<leader>gacp", function()
   local msg = vim.fn.input "Commit message (push): "
   if msg and msg ~= "" then
-    os.exec(string.format("git add --all && git commit -m '%s' && git push", msg))
+    os.exec(string.format("git add --all && git commit -m %q && git push", msg))
   else
     print "Commit aborted: No commit message provided."
   end
