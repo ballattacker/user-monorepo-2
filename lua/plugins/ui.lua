@@ -89,8 +89,11 @@ local M = {
         opts = {
           merge_duplicates = true,
           render = "wrapped-compact",
-          background_colour = "#000000",
+          max_width = function()
+            return math.floor(vim.o.columns * 0.3)
+          end,
           stages = "fade",
+          background_colour = "BgBase00",
         },
       },
     },
