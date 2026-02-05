@@ -7,7 +7,10 @@ local M = {
     -- `cc -dumpmachine` outputing `x86_64-unknown-linux-musl` which is wrong
     -- https://github.com/saghen/blink.cmp/issues/160#issuecomment-2630207543
     "saghen/blink.cmp",
-    dependencies = { "xzbdmw/colorful-menu.nvim" },
+    dependencies = {
+      "xzbdmw/colorful-menu.nvim",
+      "fang2hou/blink-copilot",
+    },
     version = "1.*",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -68,7 +71,14 @@ local M = {
         },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
+            async = true,
+          },
+        },
       },
       -- signature = { enabled = true },
       cmdline = {

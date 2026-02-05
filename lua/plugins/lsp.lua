@@ -13,6 +13,7 @@ local M = {
         "taplo", -- toml
         "html",
         "ts_ls",
+        "copilot",
       }
 
       vim.lsp.enable(servers)
