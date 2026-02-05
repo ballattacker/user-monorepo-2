@@ -2,7 +2,6 @@ local M = {
   -- TODO: move and add git keymaps here
   {
     "lewis6991/gitsigns.nvim",
-    lazy = false,
     opts = {
       current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
       current_line_blame_opts = {
