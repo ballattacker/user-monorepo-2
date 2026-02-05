@@ -82,7 +82,17 @@ local M = {
     opts = {},
     dependencies = {
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
+      {
+        "rcarriga/nvim-notify",
+        ---@module 'notify'
+        ---@type notify.Config
+        opts = {
+          merge_duplicates = true,
+          render = "wrapped-compact",
+          background_colour = "#000000",
+          stages = "fade",
+        },
+      },
     },
   },
 }
