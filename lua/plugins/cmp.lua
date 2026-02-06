@@ -13,7 +13,12 @@ local M = {
       {
         "milanglacier/minuet-ai.nvim",
         opts = {
-          provider = "gemini",
+          provider = "openai_compatible",
+          provider_options = {
+            openai_compatible = {
+              model = "arcee-ai/trinity-large-preview:free",
+            },
+          },
         },
       },
     },
