@@ -10,6 +10,12 @@ local M = {
     dependencies = {
       "xzbdmw/colorful-menu.nvim",
       "fang2hou/blink-copilot",
+      {
+        "milanglacier/minuet-ai.nvim",
+        opts = {
+          provider = "gemini",
+        },
+      },
     },
     version = "1.*",
     ---@module 'blink.cmp'
@@ -52,6 +58,8 @@ local M = {
         list = { selection = { preselect = true, auto_insert = false } },
         documentation = { auto_show = true },
         ghost_text = { enabled = true },
+        -- Recommended to avoid unnecessary AI request
+        trigger = { prefetch_on_insert = false },
         menu = {
           draw = {
             -- We don't need label_description now because label and label_description are already
@@ -71,12 +79,28 @@ local M = {
         },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        default = {
+          "lsp",
+          "path",
+          "snippets",
+          "buffer",
+          "copilot",
+          "minuet",
+        },
         providers = {
           copilot = {
             name = "copilot",
             module = "blink-copilot",
             async = true,
+          },
+          minuet = {
+            name = "minuet",
+            module = "minuet.blink",
+            async = true,
+            -- Should match minuet.config.request_timeout * 1000,
+            -- since minuet.config.request_timeout is in seconds
+            -- timeout_ms = 3000,
+            -- score_offset = 50, -- Gives minuet higher priority among suggestions
           },
         },
       },
