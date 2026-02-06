@@ -17,6 +17,12 @@ local M = {
       },
       incremental_selection = {
         enable = true,
+        keymaps = {
+          init_selection = "<C-i>", -- NOTE: side effect: <Tab>
+          node_decremental = "<C-i>",
+          node_incremental = "<C-o>",
+          scope_incremental = "gA",
+        },
       },
       indent = {
         enable = true,
