@@ -28,6 +28,23 @@ local M = {
       }
     end,
   },
+
+  {
+    "Shatur/neovim-session-manager",
+    event = { "BufReadPre", "VimEnter" },
+    config = function()
+      require("session_manager").setup {
+        autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
+      }
+      -- Show nvim-tree on session load
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "SessionLoadPost",
+        callback = function()
+          require("nvim-tree.api").tree.toggle(false, true)
+        end,
+      })
+    end,
+  },
 }
 
 return M

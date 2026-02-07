@@ -63,9 +63,8 @@ local auto = {
 
   {
     "HiPhish/rainbow-delimiters.nvim",
-    config = function(_, opts)
-      require("rainbow-delimiters.setup").setup(opts)
-
+    main = "rainbow-delimiters.setup",
+    init = function()
       vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { link = "FgBase08" })
       vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", { link = "FgBase09" })
       vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { link = "FgBase0A" })
