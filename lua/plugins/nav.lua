@@ -26,6 +26,45 @@ local M = {
       },
     },
   },
+
+  -- {
+  --   "aaronik/treewalker.nvim",
+  --   opts = {
+  --     highlight_group = "CursorColumn",
+  --   },
+  --   cmd = "Treewalker",
+  --   keys = {
+  --     { "gk", "<cmd>Treewalker Up<cr>", silent = true },
+  --     { "gj", "<cmd>Treewalker Down<cr>", silent = true },
+  --     { "gh", "<cmd>Treewalker Left<cr>", silent = true },
+  --     { "gl", "<cmd>Treewalker Right<cr>", silent = true },
+  --   },
+  -- },
+
+  {
+    "drybalka/tree-climber.nvim",
+    keys = (function()
+      local map = function(lhs, action)
+        return {
+          lhs,
+          function()
+            require("tree-climber")[action] {
+              highlight = true,
+              higroup = "CursorColumn",
+            }
+          end,
+          noremap = true,
+          silent = true,
+        }
+      end
+      return {
+        map("gh", "goto_parent"),
+        map("gl", "goto_child"),
+        map("gj", "goto_next"),
+        map("gk", "goto_prev"),
+      }
+    end)(),
+  },
 }
 
 return M
