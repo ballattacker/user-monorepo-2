@@ -27,20 +27,7 @@ local M = {
     },
   },
 
-  -- {
-  --   "aaronik/treewalker.nvim",
-  --   opts = {
-  --     highlight_group = "CursorColumn",
-  --   },
-  --   cmd = "Treewalker",
-  --   keys = {
-  --     { "gk", "<cmd>Treewalker Up<cr>", silent = true },
-  --     { "gj", "<cmd>Treewalker Down<cr>", silent = true },
-  --     { "gh", "<cmd>Treewalker Left<cr>", silent = true },
-  --     { "gl", "<cmd>Treewalker Right<cr>", silent = true },
-  --   },
-  -- },
-
+  -- NOTE: should we use hydra?
   {
     "drybalka/tree-climber.nvim",
     keys = (function()
