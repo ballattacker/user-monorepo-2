@@ -13,6 +13,7 @@ vim.keymap.set({ "n" }, "A", "<Nop>")
 vim.keymap.set({ "n", "v", "o" }, "o", "a")
 vim.keymap.set({ "n" }, "O", "A")
 
+vim.keymap.set({ "n", "v", "o" }, "s", "<Nop>")
 vim.keymap.set({ "n", "v", "o" }, "sh", "^")
 vim.keymap.set({ "n", "v", "o" }, "sl", "$")
 
