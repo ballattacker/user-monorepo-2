@@ -26,47 +26,12 @@ local M = {
         silent = false, -- Disable plugin messages (Config loaded/ignored)
         lookup_parents = false, -- Lookup config files in parent directories
       }
-
-      -- local session_name = "default"
-      -- local session_dir = vim.fs.joinpath(vim.fn.getcwd(), ".nvim", "sessions")
-      -- if vim.fn.isdirectory(session_dir) == 0 then
-      --   vim.fn.mkdir(session_dir, "p")
-      -- end
-      -- local gitignore_path = vim.fs.joinpath(session_dir, ".gitignore")
-      -- if vim.fn.filereadable(gitignore_path) == 0 then
-      --   vim.fn.writefile({ "*" }, gitignore_path)
-      -- end
-      -- local session_path = vim.fs.joinpath(session_dir, session_name .. ".vim")
-      -- vim.api.nvim_create_autocmd("User", {
-      --   pattern = "ConfigLocalFinished",
-      --   callback = function()
-      --     if vim.fn.filereadable(session_path) == 1 then
-      --       vim.cmd("source " .. session_path)
-      --       print("Session loaded: " .. session_name)
-      --     end
-      --   end,
-      -- })
-      -- vim.api.nvim_create_autocmd("VimLeave", {
-      --   pattern = "*",
-      --   callback = function()
-      --     vim.cmd("mksession! " .. vim.fs.joinpath(session_dir, session_name .. ".vim"))
-      --   end,
-      -- })
     end,
   },
 
   {
     "Shatur/neovim-session-manager",
-    init = function()
-      vim.api.nvim_create_autocmd("VeryLazy", {
-        pattern = "*",
-        callback = function()
-          require("session_manager").load_current_dir_session()
-        end,
-      })
-    end,
-    event = { "BufReadPre", "User ConfigLocalFinished" },
-    -- event = { "BufReadPre", "VeryLazy" },
+    event = "VeryLazy",
     config = function()
       require("session_manager").setup {
         autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
@@ -79,6 +44,15 @@ local M = {
         end,
       })
     end,
+    keys = {
+      {
+        "<leader>sl",
+        function()
+          require("session_manager").load_current_dir_session()
+        end,
+        desc = "Load session",
+      },
+    },
   },
 }
 
