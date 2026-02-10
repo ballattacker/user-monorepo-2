@@ -30,27 +30,29 @@ local M = {
   },
 
   {
-    "Shatur/neovim-session-manager",
-    event = "VeryLazy",
-    config = function()
-      require("session_manager").setup {
-        autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
-      }
-      -- Show nvim-tree on session load
+    "rmagatti/auto-session",
+    -- lazy = false,
+    -- events = { "User ConfigLocalFinished" },
+    init = function()
+      -- vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+      vim.opt.sessionoptions:append { "winpos", "terminal", "folds" }
+
       vim.api.nvim_create_autocmd("User", {
-        pattern = "SessionLoadPost",
+        pattern = "ConfigLocalFinished",
         callback = function()
-          require("nvim-tree.api").tree.toggle(false, true)
+          require("auto-session").restore_session()
         end,
       })
     end,
-    keys = {
-      {
-        "<leader>sl",
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+      -- log_level = 'debug',
+      post_restore_cmds = {
         function()
-          require("session_manager").load_current_dir_session()
+          require("nvim-tree.api").tree.toggle(false, true)
         end,
-        desc = "Load session",
       },
     },
   },
