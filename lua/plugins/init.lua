@@ -31,19 +31,6 @@ local M = {
 
   {
     "rmagatti/auto-session",
-    -- lazy = false,
-    -- events = { "User ConfigLocalFinished" },
-    init = function()
-      -- vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-      vim.opt.sessionoptions:append { "winpos", "terminal", "folds" }
-
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "ConfigLocalFinished",
-        callback = function()
-          require("auto-session").restore_session()
-        end,
-      })
-    end,
     ---enables autocomplete for opts
     ---@module "auto-session"
     ---@type AutoSession.Config
@@ -53,6 +40,15 @@ local M = {
         function()
           require("nvim-tree.api").tree.toggle(false, true)
         end,
+      },
+    },
+    keys = {
+      {
+        "<leader>sl",
+        function()
+          require("auto-session").restore_session()
+        end,
+        desc = "Restore Session",
       },
     },
   },
