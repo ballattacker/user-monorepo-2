@@ -57,6 +57,10 @@ M.base46 = {
     ["BgBase0E"] = { bg = "base0E" },
     ["BgBase0F"] = { bg = "base0F" },
   },
+
+  hl_override = {
+    Folded = { link = "BgBase02" },
+  },
 }
 
 M.ui = {

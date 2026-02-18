@@ -36,24 +36,6 @@ vim.opt.whichwrap = "b,s,[]"
 --   end,
 -- })
 
--- https://www.reddit.com/r/neovim/comments/1jmqd7t/sorry_ufo_these_7_lines_replaced_you/
-vim.opt.foldenable = true
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldtext = ""
--- vim.opt.foldcolumn = "0"
--- vim.opt.fillchars:append { fold = " " }
-vim.api.nvim_set_hl(0, "Folded", { link = "BgBase02" })
-vim.opt.foldcolumn = "auto:9"
-vim.opt.fillchars = {
-  fold = " ",
-  foldopen = "",
-  foldsep = " ",
-  foldclose = "",
-}
-
-
 -- https://stackoverflow.com/a/16114535
 vim.opt.fixeol = false
 
