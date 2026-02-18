@@ -23,18 +23,6 @@ vim.opt.listchars = {
 vim.opt.wrap = false
 vim.opt.virtualedit = "all"
 vim.opt.whichwrap = "b,s,[]"
--- vim.api.nvim_create_autocmd("ModeChanged", {
---   pattern = "*",
---   callback = function()
---     if vim.fn.mode() == "n" then
---       vim.opt.virtualedit = "all"
---       vim.opt.whichwrap = "b,s,[]"
---     else
---       vim.opt.virtualedit = "none"
---       vim.opt.whichwrap = "b,s,[]<>hl"
---     end
---   end,
--- })
 
 -- https://stackoverflow.com/a/16114535
 vim.opt.fixeol = false
