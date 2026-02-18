@@ -76,6 +76,68 @@ local M = {
     ft = "qf",
   },
 
+  -- {
+  --   "chrisgrieser/nvim-origami",
+  --   event = "VeryLazy",
+  --   opts = {}, -- required even when using default config
+  --   -- recommended: disable vim's auto-folding
+  --   init = function()
+  --     vim.opt.foldlevel = 99
+  --     vim.opt.foldlevelstart = 99
+  --   end,
+  --   keys = {
+  --     {
+  --       "sh",
+  --       function()
+  --         require("origami").caret()
+  --       end,
+  --       desc = "Origami fold recursively",
+  --     },
+  --     {
+  --       "sl",
+  --       function()
+  --         require("origami").dollar()
+  --       end,
+  --       desc = "Origami unfold recursively",
+  --     },
+  --   },
+  -- },
+
+  -- {
+  --   "kevinhwang91/nvim-ufo",
+  --   dependencies = { "kevinhwang91/promise-async" },
+  --   event = "VeryLazy",
+  --   opts = {
+  --     provider_selector = function(bufnr, filetype, buftype)
+  --       return { "treesitter", "indent" }
+  --     end,
+  --   },
+  --   init = function()
+  --     vim.o.foldcolumn = "1" -- '0' is not bad
+  --     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+  --     vim.o.foldlevelstart = 99
+  --     vim.o.foldenable = true
+  --   end,
+  --   keys = {
+  --     {
+  --       "zR",
+  --       function()
+  --         require("ufo").openAllFolds()
+  --       end,
+  --       desc = "Open all folds",
+  --       remap = true,
+  --     },
+  --     {
+  --       "zM",
+  --       function()
+  --         require("ufo").closeAllFolds()
+  --       end,
+  --       desc = "Close all folds",
+  --       remap = true,
+  --     },
+  --   },
+  -- },
+
   {
     "folke/noice.nvim",
     event = "VeryLazy",
