@@ -75,6 +75,20 @@ M.ui = {
   statusline = {
     theme = "vscode_colored",
     separator_style = "default",
+    order = {
+      "mode",
+      "file",
+      "git",
+      "%=",
+      "lsp_msg",
+      "%=",
+      "diagnostics",
+      "lsp",
+      "showmode",
+      "showcmd",
+      "cursor",
+      "cwd",
+    },
     modules = {
       file = function()
         local icon = "󰈚"
@@ -91,6 +105,18 @@ M.ui = {
         end
 
         return table.concat({ "%#StText#", icon, path, "" }, " ")
+      end,
+      showmode = function()
+        return require("noice").api.status.mode.get_hl()
+      end,
+      showcmd = function()
+        local cmd = require("noice").api.status.command.get_hl()
+        return string.format(" %6s ", cmd)
+      end,
+      cursor = function()
+        local line = vim.fn.line "."
+        local col = vim.fn.col "."
+        return "%#StText#" .. string.format("%3d:%2d ", line, col)
       end,
     },
   },
