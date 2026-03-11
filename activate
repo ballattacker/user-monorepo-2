@@ -1,0 +1,15 @@
+#!/bin/sh
+# Activate script: source all environment configs from posix.d/
+# Usage: eval "$(./activate)"
+# Outputs: export POSIX_DIR=... + sourcing commands for all .sh files in posix.d/
+
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+POSIX_DIR="$BASE_DIR/posix.d"
+mkdir -p "$POSIX_DIR"
+
+echo "export POSIX_DIR=$POSIX_DIR"
+for file in "$POSIX_DIR"/*.sh; do
+  if [ -f "$file" ] && [ -r "$file" ]; then
+    printf ". %s\n" "$file"
+  fi
+done

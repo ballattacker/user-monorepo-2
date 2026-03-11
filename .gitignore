@@ -1,0 +1,3 @@
+.worktrees/
+posix.d/*
+!posix.d/10-xdg.sh
