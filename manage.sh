@@ -70,10 +70,14 @@ shift || true
 
 # Main command handler
 case "$cmd" in
-nix)
+setup)
   curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
   echo "experimental-features = nix-command flakes" >>$$HOME/.config/nix/nix.conf
   nix registry add nixpkgs github:numtide/nixpkgs-unfree/nixos-unstable
+
+  echo "eval \$($repo_dir/activate) >>${1:-~/.bashrc}"
+
+  ln -frs "$repo_dir"/manage.sh "$HOME"/.local/bin/usrp
   ;;
 
 create)
