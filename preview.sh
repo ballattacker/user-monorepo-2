@@ -73,7 +73,7 @@ handle_mime() {
         # Text
         text/* | */xml)
             # Syntax highlight
-            bat --theme base16 -fpp ${FILE_PATH} && exit 0
+            bat --theme ansi -fpp ${FILE_PATH} && exit 0
             exit 0;;
 
         # Image
