@@ -1,9 +1,8 @@
 #!/bin/sh
 
-cd "$(dirname "$0")" || exit
 name=default
 usrp install dep
 nix profile add nixpkgs#$name
-ln -frs . "$XDG_CONFIG_HOME"/$name
-ln -frs ./env "$POSIX_DIR"/"$name".sh
-ln -frs ./bin "$HOME"/.local/bin/$name
+ln -fnrs . "$XDG_CONFIG_HOME"/$name
+ln -fnrs ./env "$POSIX_DIR"/"$name".sh
+ln -fnrs ./bin "$HOME"/.local/bin/$name
