@@ -2,4 +2,4 @@
 
 name=zellij
 nix profile add nixpkgs#$name
-ln -frs . "$XDG_CONFIG_HOME"/$name
+ln -fnrs . "$XDG_CONFIG_HOME"/$name
