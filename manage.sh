@@ -168,7 +168,10 @@ install)
     exit 1
   fi
 
+  owd="$(pwd)"
   while [ -n "${1:-}" ]; do
+    cd "$owd" || exit
+
     if [ ! -d "$1" ]; then
       module_name=$1
       $0 clone "$module_name"
@@ -189,6 +192,8 @@ install)
 
     module_name="$(basename "$dir")"
     print_info "Installing module: $module_name"
+
+    cd "$dir" || exit
 
     if [ "$dry_run" = true ]; then
       print_info "  [DRY RUN] Would execute: sh $dir/install.sh"
