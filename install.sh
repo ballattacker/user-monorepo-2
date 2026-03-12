@@ -3,7 +3,7 @@
 name=yazi
 usrp install preview
 nix profile add nixpkgs#$name
-ln -frs . "$XDG_CONFIG_DIR"/$name
+ln -frs . "$XDG_CONFIG_HOME"/$name
 ln -frs ./hook "$POSIX_DIR"/"$name".sh
 
 deps="
