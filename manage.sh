@@ -196,9 +196,9 @@ install)
     cd "$dir" || exit
 
     if [ "$dry_run" = true ]; then
-      print_info "  [DRY RUN] Would execute: sh $dir/install.sh"
+      print_info "  [DRY RUN] Would execute: sh install.sh"
 
-      if sh -n "$dir/install.sh" 2>/dev/null; then
+      if sh -n install.sh 2>/dev/null; then
         print_success "  ✓ install.sh syntax is valid"
       else
         print_error "  ✗ install.sh has syntax errors"
@@ -207,7 +207,7 @@ install)
     else
       print_info "  Executing install.sh..."
 
-      if sh "$dir/install.sh"; then
+      if sh install.sh; then
         print_success "  ✓ Installed successfully"
       else
         print_error "  ✗ Installation failed for module: $module_name"
