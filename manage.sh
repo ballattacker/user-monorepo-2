@@ -155,7 +155,7 @@ install)
   fi
 
   while [ -n "${1:-}" ]; do
-    dir="$(realpath "$1")"
+    dir="$(cd "$1" && pwd)"
 
     if [ ! -d "$dir" ]; then
       print_error "Module directory not found: $dir"
