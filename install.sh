@@ -4,8 +4,8 @@ cd "$(dirname "$0")" || exit
 name=neovim
 usrp install mise
 nix profile add nixpkgs#$name
-ln -frs . "$XDG_CONFIG_HOME"/nvim
-ln -frs ./env "$POSIX_DIR"/nvim.sh
+ln -fnrs . "$XDG_CONFIG_HOME"/nvim
+ln -fnrs ./env "$POSIX_DIR"/nvim.sh
 
 deps="
   unzip
