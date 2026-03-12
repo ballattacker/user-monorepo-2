@@ -5,7 +5,7 @@
 set -eu
 
 # Configuration
-repo_dir="$(cd "$(dirname "$0")" && pwd)"
+repo_dir="$(dirname "$(realpath "$0")")"
 modules_dir="$repo_dir/.worktrees/module"
 mkdir -p "$modules_dir"
 
