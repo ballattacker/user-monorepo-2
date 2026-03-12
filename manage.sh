@@ -70,6 +70,12 @@ shift || true
 
 # Main command handler
 case "$cmd" in
+setup)
+  curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
+  echo "experimental-features = nix-command flakes" >>$$HOME/.config/nix/nix.conf
+  nix registry add nixpkgs github:numtide/nixpkgs-unfree/nixos-unstable
+  ;;
+
 create)
   if [ -z "${1:-}" ]; then
     print_error "Usage: $0 create <module-name>"
@@ -83,7 +89,7 @@ create)
     print_warning "Branch '$module_name' already exists"
   else
     print_info "Creating branch '$module_name' from template..."
-    if ! git branch "$module_name" origin/template 2>/dev/null; then
+    if ! git branch "$module_name" origin/template --no-track 2>/dev/null; then
       print_error "Failed to create branch: $module_name"
       exit 1
     fi
