@@ -41,7 +41,7 @@ Usage: manage.sh <command> [options] [args]
 Commands:
   create <name>              Create a new module branch and worktree
   clone <name> [name ...]    Clone/update modules into worktrees
-  install [dir ...]          Install module(s) from given directories
+  install [dir/name ...]     Install module(s) from given directories/modules
   status                     Show dirty repositories
   pull                       Pull all repositories
   push                       Commit and push all repositories
@@ -54,7 +54,7 @@ Options:
 Examples:
   manage.sh create zsh
   manage.sh clone nvim mise
-  manage.sh install .worktrees/module/git .worktrees/module/nvim
+  manage.sh install git .worktrees/module/nvim
   manage.sh install --dry-run .worktrees/module/git
   manage.sh status
 EOF
@@ -161,7 +161,13 @@ install)
   fi
 
   while [ -n "${1:-}" ]; do
-    dir="$(cd "$1" && pwd)"
+    if [ ! -d "$1" ]; then
+      module_name=$1
+      $0 clone "$module_name"
+      dir="$modules_dir/$module_name"
+    else
+      dir="$(cd "$1" && pwd)"
+    fi
 
     if [ ! -d "$dir" ]; then
       print_error "Module directory not found: $dir"
