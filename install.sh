@@ -3,7 +3,7 @@
 name=zsh
 usrp install yazi
 nix profile add nixpkgs#$name
-ln -frs . "$XDG_CONFIG_DIR"/$name
+ln -frs . "$XDG_CONFIG_HOME"/$name
 ln -frs ./.zshenv "$POSIX_DIR"/"$name".sh
 
 nix profile add nixpkgs#fzf
