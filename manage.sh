@@ -77,7 +77,7 @@ setup)
   sh -c "nix registry add nixpkgs github:numtide/nixpkgs-unfree/nixos-unstable"
 
   mkdir -p "$repo_dir/posix.d"
-  echo "eval \$($repo_dir/activate)" >>"${1:-$HOME/.bashrc}"
+  echo "eval '\$($repo_dir/activate)'" >>"${1:-$HOME/.bashrc}"
 
   mkdir -p "$HOME"/.local/bin
   ln -frs "$repo_dir"/manage.sh "$HOME"/.local/bin/usrp
