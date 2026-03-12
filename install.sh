@@ -20,7 +20,6 @@ deps="
   bun
   deno
   go
-  node
   python
   rust
   zig
@@ -29,3 +28,4 @@ deps="
 for dep in $deps; do
   mise use --global "$dep"@latest
 done
+mise use --global node@24
