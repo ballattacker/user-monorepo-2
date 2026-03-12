@@ -11,31 +11,31 @@ mkdir -p "$modules_dir"
 
 # Utility functions
 print_error() {
-    printf "\033[31mError:\033[0m %s\n" "$@" >&2
+  printf "\033[31mError:\033[0m %s\n" "$@" >&2
 }
 
 print_success() {
-    printf "\033[32m✓\033[0m %s\n" "$@"
+  printf "\033[32m✓\033[0m %s\n" "$@"
 }
 
 print_info() {
-    printf "\033[34m→\033[0m %s\n" "$@"
+  printf "\033[34m→\033[0m %s\n" "$@"
 }
 
 print_warning() {
-    printf "\033[33m⚠\033[0m %s\n" "$@" >&2
+  printf "\033[33m⚠\033[0m %s\n" "$@" >&2
 }
 
 # Parse global flags
 dry_run=false
 while [ $# -gt 0 ]; do
-    case "$1" in
-        --dry-run)
-            dry_run=true
-            shift
-            ;;
-        --help | -h)
-            cat <<'EOF'
+  case "$1" in
+  --dry-run)
+    dry_run=true
+    shift
+    ;;
+  --help | -h)
+    cat <<'EOF'
 Usage: manage.sh <command> [options] [args]
 
 Commands:
@@ -58,10 +58,10 @@ Examples:
   manage.sh install --dry-run .worktrees/module/git
   manage.sh status
 EOF
-            exit 0
-            ;;
-        *) break ;;
-    esac
+    exit 0
+    ;;
+  *) break ;;
+  esac
 done
 
 # Get the command
@@ -70,206 +70,206 @@ shift || true
 
 # Main command handler
 case "$cmd" in
-    create)
-        if [ -z "${1:-}" ]; then
-            print_error "Usage: $0 create <module-name>"
-            exit 1
-        fi
-        
-        module_name="$1"
-        cd "$repo_dir"
-        
-        if git rev-parse --verify "$module_name" >/dev/null 2>1; then
-            print_warning "Branch '$module_name' already exists"
+create)
+  if [ -z "${1:-}" ]; then
+    print_error "Usage: $0 create <module-name>"
+    exit 1
+  fi
+
+  module_name="$1"
+  cd "$repo_dir"
+
+  if git rev-parse --verify "$module_name" >/dev/null 2>1; then
+    print_warning "Branch '$module_name' already exists"
+  else
+    print_info "Creating branch '$module_name' from template..."
+    if ! git branch "$module_name" origin/template 2>/dev/null; then
+      print_error "Failed to create branch: $module_name"
+      exit 1
+    fi
+  fi
+
+  if [ -d "$modules_dir/$module_name" ]; then
+    print_warning "Worktree directory already exists"
+  else
+    print_info "Creating worktree for '$module_name'..."
+    git worktree add "$modules_dir/$module_name" "$module_name"
+  fi
+
+  print_success "Created module: $module_name"
+  ;;
+
+clone)
+  if [ -z "${1:-}" ]; then
+    print_error "Usage: $0 clone <module-name> [module-name ...]"
+    exit 1
+  fi
+
+  cd "$repo_dir"
+
+  while [ -n "${1:-}" ]; do
+    module_name="$1"
+    module_path="$modules_dir/$module_name"
+
+    if [ -d "$module_path" ]; then
+      if [ -d "$module_path/.git" ] || [ -f "$module_path/.git" ]; then
+        print_info "Updating module: $module_name"
+        if git -C "$module_path" pull; then
+          print_success "Updated module: $module_name"
         else
-            print_info "Creating branch '$module_name' from template..."
-            if ! git branch "$module_name" origin/template 2>/dev/null; then
-                print_error "Failed to create branch: $module_name"
-                exit 1
-            fi
+          print_warning "Update failed for: $module_name"
         fi
-        
-        if [ -d "$modules_dir/$module_name" ]; then
-            print_warning "Worktree directory already exists"
-        else
-            print_info "Creating worktree for '$module_name'..."
-            git worktree add "$modules_dir/$module_name" "$module_name"
-        fi
-        
-        print_success "Created module: $module_name"
-        ;;
-    
-    clone)
-        if [ -z "${1:-}" ]; then
-            print_error "Usage: $0 clone <module-name> [module-name ...]"
-            exit 1
-        fi
-        
-        cd "$repo_dir"
-        
-        while [ -n "${1:-}" ]; do
-            module_name="$1"
-            module_path="$modules_dir/$module_name"
-            
-            if [ -d "$module_path" ]; then
-                if [ -d "$module_path/.git" ] || [ -f "$module_path/.git" ]; then
-                    print_info "Updating module: $module_name"
-                    if git -C "$module_path" pull; then
-                        print_success "Updated module: $module_name"
-                    else
-                        print_warning "Update failed for: $module_name"
-                    fi
-                else
-                    print_error "Directory '$module_path' exists but is not a git repository"
-                    exit 1
-                fi
-            else
-                print_info "Cloning module: $module_name"
-                if git worktree add "$module_path" "$module_name"; then
-                    print_success "Cloned module: $module_name"
-                else
-                    print_error "Failed to clone module: $module_name"
-                    exit 1
-                fi
-            fi
-            
-            shift
-        done
-        ;;
-    
-    install)
-        if [ -z "${1:-}" ]; then
-            print_error "Usage: $0 install [--dry-run] <module-dir> [module-dir ...]"
-            exit 1
-        fi
-        
-        # Check if first arg is --dry-run
-        if [ "$1" = "--dry-run" ]; then
-            dry_run=true
-            shift
-        fi
-        
-        if [ -z "${1:-}" ]; then
-            print_error "Usage: $0 install [--dry-run] <module-dir> [module-dir ...]"
-            exit 1
-        fi
-        
-        while [ -n "${1:-}" ]; do
-            dir="$(realpath "$1")"
-            
-            if [ ! -d "$dir" ]; then
-                print_error "Module directory not found: $dir"
-                exit 1
-            fi
-            
-            if [ ! -f "$dir/install.sh" ]; then
-                print_error "No install.sh found in $dir"
-                exit 1
-            fi
-            
-            module_name="$(basename "$dir")"
-            print_info "Installing module: $module_name"
-            
-            if [ "$dry_run" = true ]; then
-                print_info "  [DRY RUN] Would execute: sh $dir/install.sh"
-                
-                if sh -n "$dir/install.sh" 2>/dev/null; then
-                    print_success "  ✓ install.sh syntax is valid"
-                else
-                    print_error "  ✗ install.sh has syntax errors"
-                    exit 1
-                fi
-            else
-                print_info "  Executing install.sh..."
-                
-                if sh "$dir/install.sh"; then
-                    print_success "  ✓ Installed successfully"
-                else
-                    print_error "  ✗ Installation failed for module: $module_name"
-                    exit 1
-                fi
-            fi
-            
-            shift
-        done
-        ;;
-    
-    status)
-        print_info "Checking repository status..."
-        
-        # Find all git repositories including worktrees
-        find "$repo_dir" -name ".git" -type f -o -name ".git" -type d 2>/dev/null | while read -r gitdir; do
-            repo_path="$(dirname "$gitdir")"
-            
-            # Check if there are any changes
-            if git -C "$repo_path" status --porcelain 2>/dev/null | grep -q .; then
-                print_info "$repo_path (dirty)"
-                git -C "$repo_path" status -s -b 2>/dev/null || true
-            fi
-        done
-        ;;
-    
-    pull)
-        print_info "Pulling all repositories..."
-        
-        find "$repo_dir" -name ".git" -type f -o -name ".git" -type d 2>/dev/null | while read -r gitdir; do
-            repo_path="$(dirname "$gitdir")"
-            print_info "Pulling $repo_path..."
-            
-            if git -C "$repo_path" pull 2>/dev/null; then
-                print_success "✓ Pulled $repo_path"
-            else
-                print_warning "✗ Failed to pull $repo_path"
-            fi
-        done
-        ;;
-    
-    push)
-        print_info "Pushing all repositories..."
-        
-        find "$repo_dir" -name ".git" -type f -o -name ".git" -type d 2>/dev/null | while read -r gitdir; do
-            repo_path="$(dirname "$gitdir")"
-            print_info "Pushing $repo_path..."
-            
-            # Stage all changes
-            git -C "$repo_path" add --all 2>/dev/null || true
-            
-            # Commit if there are changes
-            if git -C "$repo_path" diff --cached --quiet; then
-                print_info "  No changes to commit"
-            else
-                git -C "$repo_path" commit -m "auto: manage.sh push" 2>/dev/null || true
-            fi
-            
-            # Push changes
-            if git -C "$repo_path" push 2>/dev/null; then
-                print_success "✓ Pushed $repo_path"
-            else
-                print_warning "✗ Failed to push $repo_path"
-            fi
-        done
-        ;;
-    
-    list)
-        print_info "Modules:"
-        
-        # List all module branches
-        if git -C "$repo_dir" branch -a 2>/dev/null | grep -v "^\*" | sed 's/^[[:space:]]*//'; then
-            true
-        else
-            print_info "No modules found"
-        fi
-        ;;
-    
-    *)
-        if [ -z "$cmd" ]; then
-            print_error "Usage: $0 <command> [options] [args]"
-            print_error "Run '$0 --help' for usage information"
-            exit 1
-        else
-            print_error "Unknown command: $cmd"
-            print_error "Run '$0 --help' for usage information"
-            exit 1
-        fi
-        ;;
+      else
+        print_error "Directory '$module_path' exists but is not a git repository"
+        exit 1
+      fi
+    else
+      print_info "Cloning module: $module_name"
+      if git worktree add "$module_path" "$module_name"; then
+        print_success "Cloned module: $module_name"
+      else
+        print_error "Failed to clone module: $module_name"
+        exit 1
+      fi
+    fi
+
+    shift
+  done
+  ;;
+
+install)
+  if [ -z "${1:-}" ]; then
+    print_error "Usage: $0 install [--dry-run] <module-dir> [module-dir ...]"
+    exit 1
+  fi
+
+  # Check if first arg is --dry-run
+  if [ "$1" = "--dry-run" ]; then
+    dry_run=true
+    shift
+  fi
+
+  if [ -z "${1:-}" ]; then
+    print_error "Usage: $0 install [--dry-run] <module-dir> [module-dir ...]"
+    exit 1
+  fi
+
+  while [ -n "${1:-}" ]; do
+    dir="$(realpath "$1")"
+
+    if [ ! -d "$dir" ]; then
+      print_error "Module directory not found: $dir"
+      exit 1
+    fi
+
+    if [ ! -f "$dir/install.sh" ]; then
+      print_error "No install.sh found in $dir"
+      exit 1
+    fi
+
+    module_name="$(basename "$dir")"
+    print_info "Installing module: $module_name"
+
+    if [ "$dry_run" = true ]; then
+      print_info "  [DRY RUN] Would execute: sh $dir/install.sh"
+
+      if sh -n "$dir/install.sh" 2>/dev/null; then
+        print_success "  ✓ install.sh syntax is valid"
+      else
+        print_error "  ✗ install.sh has syntax errors"
+        exit 1
+      fi
+    else
+      print_info "  Executing install.sh..."
+
+      if sh "$dir/install.sh"; then
+        print_success "  ✓ Installed successfully"
+      else
+        print_error "  ✗ Installation failed for module: $module_name"
+        exit 1
+      fi
+    fi
+
+    shift
+  done
+  ;;
+
+status)
+  print_info "Checking repository status..."
+
+  # Find all git repositories including worktrees
+  find "$repo_dir" -name ".git" -type f -o -name ".git" -type d 2>/dev/null | while read -r gitdir; do
+    repo_path="$(dirname "$gitdir")"
+
+    # Check if there are any changes
+    if git -C "$repo_path" status --porcelain 2>/dev/null | grep -q .; then
+      print_info "$repo_path (dirty)"
+      git -C "$repo_path" status -s -b 2>/dev/null || true
+    fi
+  done
+  ;;
+
+pull)
+  print_info "Pulling all repositories..."
+
+  find "$repo_dir" -name ".git" -type f -o -name ".git" -type d 2>/dev/null | while read -r gitdir; do
+    repo_path="$(dirname "$gitdir")"
+    print_info "Pulling $repo_path..."
+
+    if git -C "$repo_path" pull 2>/dev/null; then
+      print_success "✓ Pulled $repo_path"
+    else
+      print_warning "✗ Failed to pull $repo_path"
+    fi
+  done
+  ;;
+
+push)
+  print_info "Pushing all repositories..."
+
+  find "$repo_dir" -name ".git" -type f -o -name ".git" -type d 2>/dev/null | while read -r gitdir; do
+    repo_path="$(dirname "$gitdir")"
+    print_info "Pushing $repo_path..."
+
+    # Stage all changes
+    git -C "$repo_path" add --all 2>/dev/null || true
+
+    # Commit if there are changes
+    if git -C "$repo_path" diff --cached --quiet; then
+      print_info "  No changes to commit"
+    else
+      git -C "$repo_path" commit -m "auto: manage.sh push" 2>/dev/null || true
+    fi
+
+    # Push changes
+    if git -C "$repo_path" push 2>/dev/null; then
+      print_success "✓ Pushed $repo_path"
+    else
+      print_warning "✗ Failed to push $repo_path"
+    fi
+  done
+  ;;
+
+list)
+  print_info "Modules:"
+
+  # List all module branches
+  if git -C "$repo_dir" branch -a 2>/dev/null | grep -v "^\*" | sed 's/^[[:space:]]*//'; then
+    true
+  else
+    print_info "No modules found"
+  fi
+  ;;
+
+*)
+  if [ -z "$cmd" ]; then
+    print_error "Usage: $0 <command> [options] [args]"
+    print_error "Run '$0 --help' for usage information"
+    exit 1
+  else
+    print_error "Unknown command: $cmd"
+    print_error "Run '$0 --help' for usage information"
+    exit 1
+  fi
+  ;;
 esac
