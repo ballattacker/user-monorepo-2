@@ -1,6 +1,10 @@
 [user]
 	name = default
 	email = default
+
+[push]
+	autoSetupRemote = true
+
 [alias]
-	graph = "log --graph --abbrev-commit --decorate --date=format:'%Y-%m-%d' --format=format:'%C(magenta)%h%C(reset) %C(green)%ad%C(reset) %C(dim white)%an%C(reset) %C(white)%s%C(reset) %C(auto)%d%C(reset)' --all"
-  acp = ''!f() { git add -A && git commit -m "$1" && git push; }; f''
+	graph = log --graph --abbrev-commit --decorate --date=format:'%Y-%m-%d' --format=format:'%C(magenta)%h%C(reset) %C(green)%ad%C(reset) %C(dim white)%an%C(reset) %C(white)%s%C(reset) %C(auto)%d%C(reset)' --all
+	acp = "!f() { git add -A && git commit -m \"$1\" && git push; }; f"
