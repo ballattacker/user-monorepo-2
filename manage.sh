@@ -70,7 +70,7 @@ shift || true
 
 # Main command handler
 case "$cmd" in
-setup)
+nix)
   curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
   echo "experimental-features = nix-command flakes" >>$$HOME/.config/nix/nix.conf
   nix registry add nixpkgs github:numtide/nixpkgs-unfree/nixos-unstable
