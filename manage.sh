@@ -79,7 +79,7 @@ create)
   module_name="$1"
   cd "$repo_dir"
 
-  if git rev-parse --verify "$module_name" >/dev/null 2>1; then
+  if git rev-parse --verify "$module_name" >/dev/null 2>&1; then
     print_warning "Branch '$module_name' already exists"
   else
     print_info "Creating branch '$module_name' from template..."
