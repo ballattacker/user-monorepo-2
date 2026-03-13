@@ -107,7 +107,7 @@ create)
     print_warning "Worktree directory already exists"
   else
     print_info "Creating worktree for '$module_name'..."
-    git worktree add "$modules_dir/$module_name" "$module_name"
+    git worktree add "$modules_dir/$module_name" module/"$module_name"
   fi
 
   print_success "Created module: $module_name"
