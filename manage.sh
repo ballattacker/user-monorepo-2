@@ -74,7 +74,10 @@ setup)
   curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
   mkdir -p "$HOME"/.config/nix
   echo "experimental-features = nix-command flakes" >>"$HOME"/.config/nix/nix.conf
-  sh -c "nix registry add nixpkgs github:numtide/nixpkgs-unfree/nixos-unstable"
+  if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+  fi
+  nix registry add nixpkgs github:numtide/nixpkgs-unfree/nixos-unstable
 
   mkdir -p "$repo_dir/posix.d"
   echo "eval \"\$($repo_dir/activate)\"" >>"${1:-$HOME/.bashrc}"
