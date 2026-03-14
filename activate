@@ -3,12 +3,12 @@
 # Usage: eval "$(./activate)"
 # Outputs: export POSIX_DIR=... + sourcing commands for all .sh files in posix.d/
 
-BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
-printf ". %s\n" "$BASE_DIR/xdg.sh"
+USRP_DIR="$(cd "$(dirname "$0")" && pwd)"
+printf ". %s\n" "$USRP_DIR/xdg.sh"
+echo "export USRP_DIR=$USRP_DIR"
 
-POSIX_DIR="$BASE_DIR/posix.d"
+POSIX_DIR="$USRP_DIR/posix"
 mkdir -p "$POSIX_DIR"
-
 echo "export POSIX_DIR=$POSIX_DIR"
 for file in "$POSIX_DIR"/*.sh; do
   if [ -f "$file" ] && [ -r "$file" ]; then
