@@ -2,7 +2,7 @@
 
 name=preview
 dir="$(cd "$(dirname "$0")" && pwd)"
-echo "export PATH=\"$dir\${PATH:+\":\$PATH\"}\"" >"$POSIX_DIR"/"$name".sh
+printf 'export PATH="%s${PATH:+":$PATH"}"' "$dir" >"$POSIX_DIR"/"$name".sh
 
 deps="
   atool
