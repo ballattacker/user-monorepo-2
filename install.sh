@@ -1,8 +1,7 @@
 #!/bin/sh
 
-cd "$(dirname "$0")" || exit
 name=neovim
-usrp install mise
+usrp install dev
 nix profile add nixpkgs#$name
 ln -fnrs . "$XDG_CONFIG_HOME"/nvim
 ln -fnrs ./env "$POSIX_DIR"/nvim.sh
@@ -15,17 +14,3 @@ deps="
 for dep in $deps; do
   nix profile add nixpkgs#"$dep"
 done
-
-deps="
-  bun
-  deno
-  go
-  python
-  rust
-  zig
-"
-
-for dep in $deps; do
-  mise use --global "$dep"@latest
-done
-mise use --global node@24
