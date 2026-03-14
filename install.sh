@@ -2,7 +2,7 @@
 
 name=neovim
 usrp install dev
-nix profile add nixpkgs#$name
+mise use --global $name@latest
 ln -fnrs . "$XDG_CONFIG_HOME"/nvim
 ln -fnrs ./env "$POSIX_DIR"/nvim.sh
 
