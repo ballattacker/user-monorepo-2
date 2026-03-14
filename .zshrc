@@ -1,4 +1,4 @@
-[ -d "$POSIX_DIR" ] && eval "$("$POSIX_DIR"/../activate)"
+[ -d "$USRP_DIR" ] && eval "$("$USRP_DIR"/activate)"
 
 # Source config
 for file in $ZDOTDIR/config/*; do
