@@ -1,0 +1,10 @@
+#!/bin/bash
+# Check if we are performing a copy operation (-i or -in)
+if [[ "$*" == *"-i"* ]] || [[ "$*" == *"-in"* ]]; then
+    # Use 'tee' to send the data to both xclip and Windows clip.exe
+    # /mnt/c/Windows/System32/clip.exe is the standard WSL path
+    tee <&0 >(xclip "$@") | /mnt/c/Windows/System32/clip.exe
+else
+    # For paste or other operations, just run xclip normally
+    exec xclip "$@"
+fi
