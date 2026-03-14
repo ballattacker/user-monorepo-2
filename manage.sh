@@ -5,9 +5,9 @@
 set -eu
 
 # Configuration
-repo_dir="$(dirname "$(realpath "$0")")"
-modules_dir="$repo_dir/.worktrees/module"
-mkdir -p "$modules_dir"
+repo_dir="${USRP_DIR:-$(dirname "$0")}"
+worktrees_dir="$repo_dir/.worktrees"
+mkdir -p "$worktrees_dir"
 
 # Utility functions
 print_error() {
@@ -79,8 +79,7 @@ setup)
   fi
   nix registry add nixpkgs github:numtide/nixpkgs-unfree/nixos-unstable
 
-  mkdir -p "$repo_dir/posix.d"
-  echo "eval \"\$($repo_dir/activate)\"" >>"${1:-$HOME/.bashrc}"
+  printf 'eval "$(%s/activate)"\n' "$repo_dir" >>"${1:-$HOME/.bashrc}"
 
   mkdir -p "$HOME"/.local/bin
   ln -frs "$repo_dir"/manage.sh "$HOME"/.local/bin/usrp
@@ -94,23 +93,25 @@ create)
   fi
 
   module_name="$1"
+  module_branch=module/"$module_name"
+  module_path="$worktrees_dir/$module_branch"
   cd "$repo_dir"
 
-  if git rev-parse --verify "$module_name" 2>/dev/null; then
-    print_warning "Branch '$module_name' already exists"
+  if git rev-parse --verify "$module_branch" 2>/dev/null; then
+    print_warning "Branch '$module_branch' already exists"
   else
-    print_info "Creating branch '$module_name' from template..."
-    if ! git branch module/"$module_name" origin/template --no-track 2>/dev/null; then
-      print_error "Failed to create branch: $module_name"
+    print_info "Creating branch '$module_branch' from template..."
+    if ! git branch "$module_branch" template --no-track 2>/dev/null; then
+      print_error "Failed to create branch: $module_branch"
       exit 1
     fi
   fi
 
-  if [ -d "$modules_dir/$module_name" ]; then
+  if [ -d "$module_path" ]; then
     print_warning "Worktree directory already exists"
   else
-    print_info "Creating worktree for '$module_name'..."
-    git worktree add "$modules_dir/$module_name" module/"$module_name"
+    print_info "Creating worktree for '$module_branch'..."
+    git worktree add "$module_path" "$module_branch"
   fi
 
   print_success "Created module: $module_name"
@@ -126,7 +127,8 @@ clone)
 
   while [ -n "${1:-}" ]; do
     module_name="$1"
-    module_path="$modules_dir/$module_name"
+    module_branch=module/"$module_name"
+    module_path="$worktrees_dir/$module_branch"
 
     if [ -d "$module_path" ]; then
       if [ -d "$module_path/.git" ] || [ -f "$module_path/.git" ]; then
@@ -142,7 +144,7 @@ clone)
       fi
     else
       print_info "Cloning module: $module_name"
-      if git worktree add "$module_path" module/"$module_name"; then
+      if git worktree add "$module_path" "$module_branch"; then
         print_success "Cloned module: $module_name"
       else
         print_error "Failed to clone module: $module_name"
@@ -178,7 +180,7 @@ install)
     if [ ! -d "$1" ]; then
       module_name=$1
       $0 clone "$module_name"
-      dir="$modules_dir/$module_name"
+      dir="$worktrees_dir/module/$module_name"
     else
       dir="$(cd "$1" && pwd)"
     fi
