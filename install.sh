@@ -1,7 +1,8 @@
 #!/bin/sh
 
+name=preview
 dir="$(cd "$(dirname "$0")" && pwd)"
-export PATH="$dir${PATH:+":$PATH"}"
+echo "export PATH=\"$dir\${PATH:+\":\$PATH\"}\"" >"$POSIX_DIR"/"$name".sh
 
 deps="
   atool
