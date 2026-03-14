@@ -71,15 +71,29 @@ shift || true
 # Main command handler
 case "$cmd" in
 setup)
-  curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
+  set_in_file() {
+    line="$1"
+    target="$2"
+    touch "$target"
+    if ! grep -qxFe "$line" "$target"; then
+      [ -s "$target" ] && [ -n "$(tail -c1 "$target")" ] && echo "" >>"$target"
+      echo "$line" >>"$target"
+    fi
+  }
+
+  if ! command -v nix >/dev/null 2>&1; then
+    curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh -s -- --daemon
+  else
+    echo "Nix is already installed."
+  fi
   mkdir -p "$HOME"/.config/nix
-  echo "experimental-features = nix-command flakes" >>"$HOME"/.config/nix/nix.conf
+  set_in_file "experimental-features = nix-command flakes" "$HOME"/.config/nix/nix.conf
   if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
     . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
   fi
   nix registry add nixpkgs github:numtide/nixpkgs-unfree/nixos-unstable
 
-  printf 'eval "$(%s/activate)"\n' "$repo_dir" >>"${1:-$HOME/.bashrc}"
+  set_in_file "$(printf 'eval "$(%s/activate)"\n' "$repo_dir")" "${1:-$HOME/.bashrc}"
 
   mkdir -p "$HOME"/.local/bin
   ln -frs "$repo_dir"/manage.sh "$HOME"/.local/bin/usrp
