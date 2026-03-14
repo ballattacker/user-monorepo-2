@@ -17,7 +17,7 @@ do_copy() {
 }
 
 do_paste() {
-  $pwsh_cmd "Get-Clipboard" | sed 's/\r$//' | sed '$ s/\n$//'
+  printf "%s" "$($pwsh_cmd "Get-Clipboard" | sed 's/\r$//')"
 }
 
 # Determine action based on the filename used to call the script ($0)
