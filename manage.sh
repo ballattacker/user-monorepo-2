@@ -101,6 +101,12 @@ create)
     print_warning "Branch '$module_branch' already exists"
   else
     print_info "Creating branch '$module_branch' from template..."
+    template_dir="$worktrees_dir/template"
+    if [ -d "$template_dir" ]; then
+      git -C "$template_dir" pull
+    else
+      git worktree add "$template_dir" template
+    fi
     if ! git branch "$module_branch" template --no-track 2>/dev/null; then
       print_error "Failed to create branch: $module_branch"
       exit 1
