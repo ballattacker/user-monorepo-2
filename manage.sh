@@ -5,7 +5,7 @@
 set -eu
 
 # Configuration
-repo_dir="${USRP_DIR:-$(dirname "$0")}"
+repo_dir="${USRP_DIR:-$(cd "$(dirname "$0")" && pwd)}"
 worktrees_dir="$repo_dir/.worktrees"
 mkdir -p "$worktrees_dir"
 
