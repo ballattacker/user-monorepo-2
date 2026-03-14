@@ -1,6 +1,7 @@
 #!/bin/sh
 
 export HISTFILE="$XDG_STATE_HOME"/bash/history
+mkdir -p "$XDG_STATE_HOME"/bash
 [ -f "$HOME"/.bash_history ] && mv "$HOME"/.bash_history "$HISTFILE"
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 mkdir -p "$GNUPGHOME"
