@@ -1,10 +1,39 @@
 #!/bin/bash
-# Check if we are performing a copy operation (-i or -in)
+
+touch /tmp/wsl-xclip-debug
+debug() {
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [PID: $$] $1" >>/tmp/wsl-xclip-debug
+}
+debug ""
+
+clip=$(type -ap xclip | grep -v "$0" | head -n 1)
+debug "clip: $clip"
+
 if [[ "$*" == *"-i"* ]] || [[ "$*" == *"-in"* ]]; then
-    # Use 'tee' to send the data to both xclip and Windows clip.exe
-    # /mnt/c/Windows/System32/clip.exe is the standard WSL path
-    tee <&0 >(xclip "$@") | /mnt/c/Windows/System32/clip.exe
+  # debug "copy"
+  # input=$(cat)
+  # debug "copied: $input"
+  # debug "@: $*"
+  # # echo -n "$input" | "$clip" ${*//-quiet/}
+  # echo "$input" | "$clip" "$@"
+  # # (echo -n "$input" | "$clip" "$@" >/dev/null 2>&1) &
+  # debug "xclip"
+  # # echo -n "$input" | clip.exe
+  # # debug "clip.exe"
+  # # printf "%s" "$input" | tee >("$clip" "$@") | clip.exe
+  # # debug "tee"
+  coproc xclip_proc { "$clip" "$@"; }
+  while IFS= read -r line; do
+    debug "line: $line"
+    echo "$line" | clip.exe
+    debug "clip.exe"
+    echo "$line" >&"${xclip_proc[1]}"
+    debug "xclip"
+  done
+  debug "copy done"
 else
-    # For paste or other operations, just run xclip normally
-    exec xclip "$@"
+  debug "paste"
+  debug "@: $*"
+  "$clip" "$@"
+  debug "paste done"
 fi
