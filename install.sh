@@ -2,7 +2,6 @@
 
 name=dev
 usrp install mise
-nix profile add nixpkgs#$name
 ln -fnrs ./env "$POSIX_DIR"/"$name".sh
 ln -fnrs ./python "$XDG_CONFIG_HOME"/python
 eval "$("$USRP_DIR"/activate)"
