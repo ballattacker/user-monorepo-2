@@ -248,9 +248,7 @@ status)
   print_info "Checking repository status..."
 
   # Find all git repositories including worktrees
-  find "$repo_dir" -name ".git" -type f -o -name ".git" -type d 2>/dev/null | while read -r gitdir; do
-    repo_path="$(dirname "$gitdir")"
-
+  for repo_path in "$repo_dir" "$worktrees_dir"/template "$worktrees_dir"/module/*/; do
     # Check if there are any changes
     if git -C "$repo_path" status --porcelain 2>/dev/null | grep -q .; then
       print_info "$repo_path (dirty)"
@@ -262,8 +260,7 @@ status)
 pull)
   print_info "Pulling all repositories..."
 
-  find "$repo_dir" -name ".git" -type f -o -name ".git" -type d 2>/dev/null | while read -r gitdir; do
-    repo_path="$(dirname "$gitdir")"
+  for repo_path in "$repo_dir" "$worktrees_dir"/template "$worktrees_dir"/module/*/; do
     print_info "Pulling $repo_path..."
 
     if git -C "$repo_path" pull 2>/dev/null; then
@@ -277,8 +274,7 @@ pull)
 push)
   print_info "Pushing all repositories..."
 
-  find "$repo_dir" -name ".git" -type f -o -name ".git" -type d 2>/dev/null | while read -r gitdir; do
-    repo_path="$(dirname "$gitdir")"
+  for repo_path in "$repo_dir" "$worktrees_dir"/template "$worktrees_dir"/module/*/; do
     print_info "Pushing $repo_path..."
 
     # Stage all changes
