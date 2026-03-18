@@ -13,6 +13,7 @@ deps="
   jq
 	ffmpeg
 	p7zip
+  ouch
   resvg
   imagemagick
   poppler-utils
