@@ -8,6 +8,8 @@ deps="
   atool
   bat
   chafa
+	ffmpeg
+	poppler-utils
 "
 
 for dep in $deps; do
