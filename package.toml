@@ -18,5 +18,10 @@ use = "ndtoan96/ouch"
 rev = "406ce6c"
 hash = "f5afc904d5106ee368c8aa2ded43bd74"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "1962818"
+hash = "f0c8c378184d5f8abd1b095a443d336d"
+
 [flavor]
 deps = []

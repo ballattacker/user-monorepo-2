@@ -89,6 +89,7 @@ keymap = [
 
 	{ on = [ "+", "x" ], run = "shell 'chmod +x $@'", desc = "Chmod +x" },
 	{ on = [ "-", "x" ], run = "shell 'chmod -x $@'", desc = "Chmod -x" },
+	{ on = [ "=" ],      run = "plugin chmod",        desc = "Chmod on selected files" },
 
 	# Linemode
 	{ on = [ "m", "s" ], run = "linemode size",        desc = "Linemode: size" },
