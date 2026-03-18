@@ -9,12 +9,11 @@ ln -fnrs ./hook "$POSIX_DIR"/"$name".sh
 deps="
 	fzf
 	zoxide
-	atool rar unzip zip
 	fd
 	ripgrep
+	atool rar unzip zip
 	ffmpeg
 	p7zip
-	poppler
 "
 
 for dep in $deps; do
