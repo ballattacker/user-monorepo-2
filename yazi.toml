@@ -10,3 +10,13 @@ show_hidden    = true
 prepend_previewers = [
   { mime = "application/pdf", run = "piper --command 'pdftotext -layout -l 10 -nopgbrk -q \"$1\" -'" }
 ]
+
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id  = "git"
+url = "*/"
+run = "git"
