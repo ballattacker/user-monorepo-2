@@ -5,3 +5,8 @@
 [mgr]
 linemode       = "size"
 show_hidden    = true
+
+[plugin]
+prepend_previewers = [
+  { mime = "application/pdf", run = "piper --command 'pdftotext -layout -l 10 -nopgbrk -q \"$1\" -'" }
+]

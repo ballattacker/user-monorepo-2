@@ -1,7 +1,6 @@
 #!/bin/sh
 
 name=yazi
-usrp install preview
 nix profile add nixpkgs#$name
 ln -fnrs . "$XDG_CONFIG_HOME"/$name
 ln -fnrs ./hook "$POSIX_DIR"/"$name".sh
@@ -11,9 +10,12 @@ deps="
 	zoxide
 	fd
 	ripgrep
-	atool rar unzip zip
+  jq
 	ffmpeg
 	p7zip
+  resvg
+  imagemagick
+  poppler-utils
 "
 
 for dep in $deps; do

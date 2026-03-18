@@ -67,8 +67,12 @@ keymap = [
 	{ on = [ "o", "c" ], run = "plugin chmod",                desc = "Chmod on selected files" },
 	{ on = "O",          run = "open --interactive",          desc = "Open selected files interactively" },
 
-	{ on = [ "o", "x" ], run = "shell --block -- atool -x $0",                           desc = "Extract selected files" },
-	{ on = [ "o", "a" ], run = "shell --block --interactive --cursor=9 -- atool -a  $@", desc = "Archive selected files" },
+	{ on = [ "o", "x" ], run = """
+    shell --block '7z x "$1" -o "${1%.*}"' --confirm
+  """, desc = "Extract selected files" },
+	{ on = [ "o", "a" ], run = """
+    shell '7z a "$(input "Archive name: ")" "$@"' --block --confirm
+  """, desc = "Archive selected files" },
 
 	{ on = [ "y", "y" ], run = "yank",                        desc = "Yank selected files (copy)" },
 	{ on = [ "d", "d" ], run = "yank --cut",                  desc = "Yank selected files (cut)" },
