@@ -18,7 +18,7 @@ end)
 function M:entry()
 	ya.emit("escape", { visual = true })
 
-	local _permit = ya.hide()
+	local _permit = ui.hide()
 	-- NOTE: custom changes added here
 	local cwd, selected, files = state()
 

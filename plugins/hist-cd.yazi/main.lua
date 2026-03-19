@@ -1,7 +1,7 @@
 local M = {}
 
 function M.entry()
-	local _permit = ya.hide()
+	local _permit = ui.hide()
 	local cwd, selected, files = state()
 
 	local output, err = M.run_with(cwd, #selected > 0 and selected or files)
