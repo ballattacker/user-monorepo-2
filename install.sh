@@ -11,6 +11,7 @@ deps="
 	fd
 	ripgrep
   jq
+  chafa
 	ffmpeg
   ouch
   resvg
