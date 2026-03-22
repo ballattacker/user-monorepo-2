@@ -44,7 +44,7 @@ local M = {
     },
     keys = {
       {
-        "<leader>sl",
+        "<leader>lL",
         function()
           require("auto-session").restore_session()
         end,
