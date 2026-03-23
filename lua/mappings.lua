@@ -71,6 +71,16 @@ end, { desc = "Kill Other Buffers" })
 -- vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
 vim.keymap.set("n", "<leader>bl", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>bh", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
+-- shortened
+vim.keymap.set("n", "bb", "<cmd>Telescope buffers<cr>", { desc = "Switch Buffer" })
+vim.keymap.set("n", "bd", function()
+  require("nvchad.tabufline").close_buffer()
+end, { desc = "Kill Buffer" })
+vim.keymap.set("n", "b<C-d>", function()
+  require("nvchad.tabufline").closeAllBufs(false)
+end, { desc = "Kill Other Buffers" })
+vim.keymap.set("n", "bl", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+vim.keymap.set("n", "bh", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
 
 -- windows
 -- not really useful but for completion sake
