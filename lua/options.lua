@@ -27,6 +27,18 @@ vim.opt.whichwrap = "b,s,[]"
 -- https://stackoverflow.com/a/16114535
 vim.opt.fixeol = false
 
+-- https://www.reddit.com/r/neovim/comments/17ieyn2/comment/kd9vt97/
+-- sync with system clipboard on focus
+vim.api.nvim_create_autocmd({ "FocusGained" }, {
+  pattern = { "*" },
+  command = [[call setreg("@", getreg("+"))]],
+})
+vim.api.nvim_create_autocmd({ "FocusLost" }, {
+  pattern = { "*" },
+  command = [[call setreg("+", getreg("@"))]],
+})
+vim.opt.clipboard = ""
+
 -- https://stackoverflow.com/questions/2295410/how-to-prevent-the-cursor-from-moving-back-one-character-on-leaving-insert-mode#comment11302803_2296229
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = "*",
